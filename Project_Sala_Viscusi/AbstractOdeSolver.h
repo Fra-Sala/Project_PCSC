@@ -3,7 +3,6 @@
 
 #include <map>
 
-
 class AbstractOdeSolver {
     // Members
 protected:
@@ -19,7 +18,10 @@ public:
     // Constructors
     AbstractOdeSolver();
     AbstractOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
-                      const double (*f)(const double y, const double t));
+                      double (*f)(const double y, const double t));
+
+    // solution visualization, flag is for file output
+    void VisualizeSolution(bool flag);
 
     // Virtual method
     virtual void solve() = 0;
