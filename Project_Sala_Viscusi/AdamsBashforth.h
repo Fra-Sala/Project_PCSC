@@ -59,7 +59,7 @@ public:
                 double y = sol.end()->second + h * (55. / 24. * rhs(sol.end()->first, sol.end()->second)
                         - 59. / 24. * rhs(std::prev(sol.end(), 1)->first, std::prev(sol.end(), 1)->second)
                         + 37. / 24 * rhs(std::prev(sol.end(), 2)->first, std::prev(sol.end(), 2)->second))
-                                - 9. / 24. * rhs(std::prev(sol.end(), 3)->first, std::prev(sol.end(), 3)->second);
+                        - 9. / 24. * rhs(std::prev(sol.end(), 3)->first, std::prev(sol.end(), 3)->second);
                 sol.insert({t, y});
             }
         }
