@@ -2,6 +2,8 @@
 #define PROJECT_SALA_VISCUSI_ABSTRACTODESOLVER_H
 
 #include <map>
+#include <vector>
+#include "fparser.hh"
 
 class AbstractOdeSolver {
     // Members
@@ -10,7 +12,7 @@ protected:
     double y0;                                                  // initial value
     double t0;                                                  // initial time
     double tf;                                                  // final time
-    double (*rhs)(const double y, const double t);              // pointer to rhs-function
+    FunctionParser *rhs;                                        // pointer to rhs-function
     std::map<double, double> sol;                               // standard map containing the solution
 
     // Methods and constructors
@@ -18,13 +20,13 @@ public:
     // Constructors
     AbstractOdeSolver();
     AbstractOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
-                      double (*f)(const double y, const double t));
+                      FunctionParser *rhs);
 
     // solution visualization, flag is for file output
     void VisualizeSolution(bool flag);
 
     // Virtual method
-    virtual void solve() = 0;
+    void solve();
 };
 
 #endif //PROJECT_SALA_VISCUSI_ABSTRACTODESOLVER_H

@@ -5,22 +5,22 @@
 #include <algorithm>
 
 AbstractOdeSolver::AbstractOdeSolver() {
-    h = 0;
-    y0 = 0;
-    t0 = 0;
-    tf = 0;
-    rhs = nullptr;
+    this->h = 0.0;
+    this->y0 = 0.0;
+    this->t0 = 0.0;
+    this->tf = 0.0;
+    this->rhs = nullptr;
     // the map in not initialized here
 }
 
 // customized constructor to initialize all variables
 AbstractOdeSolver::AbstractOdeSolver(const double stepsize, const double initval, const double inittime,
-                                     const double fintime, double (*f)(const double y, const double t)) {
-    h = stepsize;
-    y0 = initval;
-    t0 = inittime;
-    tf = fintime;
-    rhs = f;
+                                     const double fintime, FunctionParser *f_rhs) {
+    this->h = stepsize;
+    this->y0 = initval;
+    this->t0 = inittime;
+    this->tf = fintime;
+    this->rhs = f_rhs;
 }
 
 // solution visualization
@@ -31,7 +31,9 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
         assert(write_sol.is_open());
 
         write_sol << "t " << "y" << std::endl;
-        std::for_each(sol.begin(), sol.end(), [&write_sol](auto& map) {write_sol << map.first << map.second << std::endl;});
+        std::for_each(sol.begin(), sol.end(), [&write_sol](auto& map) {write_sol << map.first << "\t" << map.second << std::endl;});
+
+        write_sol.close();
 
     } else {
 
@@ -39,6 +41,9 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
         std::for_each(sol.begin(), sol.end(), [](auto& map) {std::cout << map.first << map.second << std::endl;});
 
     }
+
+
+
 }
 
 

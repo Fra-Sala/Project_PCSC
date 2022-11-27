@@ -11,18 +11,11 @@
 class ForwardEuler : public AbstractOdeSolver {
 
 public:
-    void solve() {
-        int N = round((tf - t0) / h);
+    ForwardEuler(const double stepsize, const double initval, const double inittime, const double fintime,
+                      FunctionParser *rhs);
 
-        sol.insert({t0, y0});
+    void solve() ;
 
-        for(int i = 1; i <= N; i++) {
-            double t = t0 + h * i;
-            double y = sol.end()->second + h * rhs(sol.end()->second, sol.end()->first);
-
-            sol.insert({t, y});
-        }
-    }
 };
 
 
