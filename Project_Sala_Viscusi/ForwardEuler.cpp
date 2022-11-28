@@ -27,7 +27,7 @@ void ForwardEuler::solve() {
             std::cout << "at time " << t << " ";
             auto *v = new double [2] {sol.rbegin()->first, sol.rbegin()->second};
             std::cout << "ecco gli ultimi elementi della mappa "<< v[0] << " " << v[1] << std::endl;
-            double y = sol.end()->second + h * rhs->Eval(v);
+            double y = sol.rbegin()->second + h * rhs->Eval(v);
 
             sol.emplace(t, y);
             std::cout << "I have inserted " << y << std::endl;

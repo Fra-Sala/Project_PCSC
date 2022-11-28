@@ -5,32 +5,63 @@
 #include "ForwardEuler.h"
 #include <cassert>
 #include "AbstractOdeSolver.h"
+#include <limits>
+#include <string>
 
 /////////////////////////
 // REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
 /////////////////////////
+
+
+
+
+
 int main(int argc, char* argv[]) {
 
-    // The code must be called specifing a function
 
-    if (argc > 2) {
+    auto *f_RHS = new FunctionParser;
+    double t0, tf, h, y0;
+    std::string fun;
 
-        std::cout << "we are gonna use a file" << std::endl;
+
+    if (argc == 1) {
+
+        std::cout << "--- Ode solver ---\n\nThis program solves the Cauchy problem equation in the form dy/dt = f(t,y), y in [t0, tf], y(t0) = y0\n";
+        std::cout << "Please enter an initial time t0:\n";
+
+        std::cin >> t0;
+        std::cout << "Please enter a final time tf:\n";
+
+        std::cin >> tf;
+        std::cout << "Please enter a stepsize h:\n";
+
+        std::cin >> h;
+        std::cout << "Please enter an initial value y0:\n";
+
+        std::cin >> y0;
+        std::cout << "Please enter f(t,y) between quotation marks:\n";
+
+        std::cin >> fun;
+        f_RHS->Parse(fun, "t,y");   //create a pointer to an object FunctionParser, which will be the function
     } else
     {
-        std::cout << "we are gonna use the screen to print the solution" << std::endl;
+    // the user can also run the program declaring t0, tf,  h, y0, "f(t,y)"
+        t0 = (double) atof(argv[1]);
+        tf =(double) atof(argv[2]);
+        h =  (double) atof(argv[3]);
+        y0 = (double) atof(argv[4]);
+        fun = argv[5];
+        f_RHS->Parse(fun, "t,y");
+
     }
 
 
-    auto *f_RHS = new FunctionParser;           //create a pointer to an object FunctionParser, which will be the function
-    f_RHS->Parse(argv[1], "t,y");
 
-    auto *v = new double[2] {3,0};
 
-    double h = 0.1;
-    double y0 = 0.7;
-    double t0 = 0;
-    double tf = 2;
+
+    std::cout << t0 << " " << tf << " " << h << " " << y0 << " " << fun << std::endl;
+
+
 
 
 
@@ -38,13 +69,12 @@ int main(int argc, char* argv[]) {
 
     Eq.solve();
 
-    int flag;
-    if (*argv[2] != '1') {
-        flag = 0;
-    } else {
-        flag = 1;
-    }
-    Eq.VisualizeSolution(flag);
+    std::cout << "Where would you like to print the solution?\n1) Screen\n2) File\n";
+
+    int num;
+    std::cin >> num;
+    num --;
+    Eq.VisualizeSolution(num);
 
 
 

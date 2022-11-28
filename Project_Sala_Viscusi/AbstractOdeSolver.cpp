@@ -26,12 +26,17 @@ AbstractOdeSolver::AbstractOdeSolver(const double stepsize, const double initval
 // solution visualization
 void AbstractOdeSolver::VisualizeSolution(bool flag) {
     if (flag) {
-        std::ofstream write_sol("solution.dat");
+        std::ofstream write_sol("solution.m");
 
         assert(write_sol.is_open());
 
-        write_sol << "t " << "y" << std::endl;
-        std::for_each(sol.begin(), sol.end(), [&write_sol](auto& map) {write_sol << map.first << "\t" << map.second << std::endl;});
+        write_sol << "clear\nclose all\nclc\n";
+        write_sol << "S = [";
+        std::for_each(sol.begin(), sol.end(), [&write_sol](auto& map) {write_sol << map.first << "," << map.second << ";\n";});
+
+        write_sol << "];\n";
+
+        write_sol << "plot(S(:,1), S(:,2), \"Linewidth\", 2)\ngrid on\ntitle(\"Solution of the ODE\")" << std::endl;
 
         write_sol.close();
 
