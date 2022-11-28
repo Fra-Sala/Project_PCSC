@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <algorithm>
+#include <cmath>
 
 AbstractOdeSolver::AbstractOdeSolver() {
     this->h = 0.0;
@@ -43,13 +44,31 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
     } else {
 
         std::cout << "The solution will be displayed below" << std::endl << std::endl << "t " << "y" << std::endl;
-        std::for_each(sol.begin(), sol.end(), [](auto& map) {std::cout << map.first << map.second << std::endl;});
+        std::for_each(sol.begin(), sol.end(), [](auto& map) {std::cout << map.first << " " << map.second << std::endl;});
 
     }
-
-
-
 }
 
+
+double AbstractOdeSolver::FixedPoint(double x0, FunctionParser *phi, int nmax, double tol) {
+
+    double err;
+    int it = 0;
+    double x = x0;
+
+
+    do {
+
+        double x_new = phi->Eval(&x);
+
+        err = fabs(x_new - x);
+        it = it + 1;
+
+        x = x_new;
+
+    } while ((it < nmax) && (err > tol));
+
+    return x;
+}
 
 

@@ -25,8 +25,11 @@ public:
     // solution visualization, flag is for file output
     void VisualizeSolution(bool flag);
 
+    // fixed point algorithm for implicit
+    double FixedPoint(double x0, FunctionParser *phi, int nmax, double tol);
+
     // Virtual method
-    void solve();
+    virtual void solve() = 0;
 };
 
 #endif //PROJECT_SALA_VISCUSI_ABSTRACTODESOLVER_H

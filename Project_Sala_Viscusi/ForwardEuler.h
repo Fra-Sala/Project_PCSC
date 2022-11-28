@@ -14,7 +14,7 @@ public:
     ForwardEuler(const double stepsize, const double initval, const double inittime, const double fintime,
                       FunctionParser *rhs);
 
-    void solve() ;
+    void solve() override;
 
 };
 

@@ -18,7 +18,7 @@ public:
         s = steps;
     }
 
-    void solve() ;
+    void solve() override;
 };
 
 
