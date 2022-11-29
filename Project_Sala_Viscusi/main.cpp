@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
     auto *f_RHS = new FunctionParser;
     double t0, tf, h, y0;
     std::string fun;
+    int method;
 
     if (argc == 1) {
 
@@ -30,9 +31,17 @@ int main(int argc, char* argv[]) {
                      "\t\t dy/dt = f(t,y)\n"
                      "\t y in [t0, tf], y(t0) = y0\n";
 
-        std::cout << "Please enter f(t,y) with no spaces (only one string): ";              // no quotation marks & no spaces
+        std::cout << "Please choose a solving method:\n-1) forward euler\n- 2) AdamsBashforth\n";
+
+        std::cin >> method;
+        std::cin.ignore(1000,'\n');
+
+        std::cout << "Please enter f(t,y) with no spaces (only one string):";              // no quotation marks & no spaces
+
+
         std::getline(std::cin, fun);
 
+        std::cout << fun << std::endl;
         std::cout << "Please enter an initial time t0:\n";
         std::cin >> t0;
 
@@ -47,36 +56,32 @@ int main(int argc, char* argv[]) {
 
     } else {
 
-    // the user can also run the program declaring t0, tf,  h, y0, "f(t,y)"
-        t0 = (double) atof(argv[1]);
-        tf =(double) atof(argv[2]);
-        h =  (double) atof(argv[3]);
-        y0 = (double) atof(argv[4]);
-        fun = argv[5];
+    // the user can also run the program declaring "method", "f(t,y)", t0, tf,  h, y0
+        method = (double) atof(argv[1]);
+        fun = argv[2];
+        t0 = (double) atof(argv[3]);
+        tf =(double) atof(argv[4]);
+        h =  (double) atof(argv[5]);
+        y0 = (double) atof(argv[6]);
+
     }
 
 
     f_RHS->Parse(fun, "t,y");       // create a pointer to an object FunctionParser, which will be the function
 
-    //std::cout << f_RHS << std::endl;
-    std::cout << fun << std::endl;
+    if(method == 1) {
+        ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, f_RHS);
+        Eq.solve();
+        std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+        int num;
+        std::cin >> num;
+        num--;                          // since bool must be 0 or 1
+        Eq.VisualizeSolution(num);
+    }
 
-    double v[2];
-    v[0] = 0;
-    v[1] = 1;
 
-    std::cout << "Ecco il valore " << f_RHS->Eval(v);
 
-    ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, f_RHS);
 
-    Eq.solve();
-
-    std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
-
-    int num;
-    std::cin >> num;
-    num--;                          // since bool must be 0 or 1
-    Eq.VisualizeSolution(num);
 
     return 0;
 }
