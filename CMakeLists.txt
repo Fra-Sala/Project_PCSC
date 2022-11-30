@@ -5,12 +5,12 @@ project (PCSC-project)
 set(CMAKE_CXX_STANDARD 17)
 
 add_library(pcsc
-  src/pcsc.cc
+  src/main.cpp
 )
 
 add_subdirectory(googletest)
 
-add_executable(main src/main.cc)
+add_executable(main src/main.cpp)
 target_link_libraries(main pcsc)
 
 add_executable(test_pcsc test/test.cc)
