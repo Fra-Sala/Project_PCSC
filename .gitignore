@@ -8,4 +8,3 @@ cmake_install.cmake
 .project
 .cproject
 cmake-build-debug
-
