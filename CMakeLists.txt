@@ -1,19 +1,24 @@
 
 cmake_minimum_required (VERSION 3.0)
-project (PCSC-project)
+project (Project_PCSC)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(pcsc
-  src/main.cpp
-)
+
+add_subdirectory(fparser4.5.2)
+#add_library(fparser   fparser4.5.2/fparser.cc)
 
 add_subdirectory(googletest)
 
-add_executable(main src/main.cpp)
-target_link_libraries(main pcsc)
+#add_subdirectory(fparser4.5.2)
 
-add_executable(test_pcsc test/test.cc)
-target_link_libraries(test_pcsc gtest_main gtest pthread pcsc)
+add_executable(Project_PCSC src/main.cpp src/AbstractOdeSolver.cpp src/ForwardEuler.cpp src/AdamsBashforth.cpp)
 
-add_custom_target(test ./test_pcsc DEPENDS test_pcsc)
+#target_link_directories(Project_PCSC PRIVATE fparser4.5.2)
+
+
+target_link_libraries(Project_PCSC PUBLIC fparser)
+
+target_include_directories(Project_PCSC PUBLIC "${PROJECT_BINARY_DIR}"   "${PROJECT_SOURCE_DIR}/fparser4.5.2"        )
+
+#add_custom_target(test ./test_pcsc DEPENDS test_pcsc)

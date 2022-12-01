@@ -5,6 +5,7 @@
 #include <vector>
 #include "fparser.hh"
 
+
 class AbstractOdeSolver {
     // Members
 protected:

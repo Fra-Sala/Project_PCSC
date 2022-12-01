@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "fparser.hh"
+
 #include "AdamsBashforth.h"
 #include "ForwardEuler.h"
 #include <cassert>
@@ -9,6 +9,9 @@
 #include <string>
 #include <typeinfo>
 #include <cstring>
+#include <fparser.hh>
+
+
 
 /////////////////////////
 // REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
