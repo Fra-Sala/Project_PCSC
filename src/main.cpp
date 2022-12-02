@@ -12,6 +12,7 @@
 #include <fparser.hh>
 #include "AbstractParser.h"
 #include "Fparser.h"
+#include "BackwardEuler.h"
 
 
 
@@ -38,7 +39,10 @@ int main(int argc, char* argv[]) {
                      "\t\t dy/dt = f(t,y)\n"
                      "\t y in [t0, tf], y(t0) = y0\n";
 
-        std::cout << std::endl << "Please choose a solving method:\n-1) Forward Euler\n-2) AdamsBashforth\n";
+
+
+        std::cout << "Please choose a solving method:\n-1) forward euler\n- 2) AdamsBashforth\n- 3) Backward Euler\n";
+
 
         std::cin >> method;
         std::cin.ignore(1000,'\n');
@@ -100,7 +104,14 @@ int main(int argc, char* argv[]) {
         Eq.VisualizeSolution(num);
     } else if(method == 3) {
 
-        
+        BackwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer );
+
+        Eq.solve();
+        std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+        int num;
+        std::cin >> num;
+        num--;                          // since bool must be 0 or 1
+        Eq.VisualizeSolution(num);
     }
 
 

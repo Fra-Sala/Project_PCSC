@@ -51,25 +51,22 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
 }
 
 
-double AbstractOdeSolver::FixedPoint(double x0, FunctionParser *phi, int nmax, double tol) {
-
-    double err;
-    int it = 0;
-    double x = x0;
+double AbstractOdeSolver::FixedPoint(double t_new, double y, double nmax, double tol) {
 
 
+    double it = 0.0;
+    double err, y_new;
+    double y_old = y;
     do {
 
-        double x_new = phi->Eval(&x);
-
-        err = fabs(x_new - x);
-        it = it + 1;
-
-        x = x_new;
+        y_new = y + this->h*this->funObject->EvaluateFun(t_new, y_old);
+        err = fabs(y_new - y_old);
+        it ++;
+        y_old = y_new;
 
     } while ((it < nmax) && (err > tol));
 
-    return x;
+    return y_new;
 }
 
 
