@@ -19,19 +19,11 @@ void ForwardEuler::solve() {
         int N = round((this->tf - this->t0) / this->h);
 
         auto c = this->sol.try_emplace(this->t0, this->y0);
-        std::cout << c.second << std::endl;
-        std::cout << "ecco i primi elementi della mappa " << this->sol.rbegin()->first << " " << this->sol.rbegin()->second << std::endl;
 
         for(int i = 1; i <= N; i++) {
             double t = this->t0 + this->h * i;
-            std::cout << "at time " << t << " ";
-
             double y = sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
-
             sol.emplace(t, y);
-            std::cout << "I have inserted " << y << std::endl;
-
-
         }
     }
 

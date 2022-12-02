@@ -15,7 +15,7 @@ private:
 
 public:
     void SetSteps(const int steps) {
-        s = steps;
+        this->s = steps;
     }
 
     void solve() override;
