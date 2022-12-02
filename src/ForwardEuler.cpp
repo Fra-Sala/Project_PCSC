@@ -5,15 +5,6 @@
 #include "ForwardEuler.h"
 #include <iostream>
 
-ForwardEuler::ForwardEuler(const double stepsize, const double initval, const double inittime, const double fintime,
-                           AbstractParser* fun_obj) {
-    this->h = stepsize;
-    this->y0 = initval;
-    this->t0 = inittime;
-    this->tf = fintime;
-    this->funObject = fun_obj;
-}
-
 void ForwardEuler::solve() {
 
         int N = round((this->tf - this->t0) / this->h);
