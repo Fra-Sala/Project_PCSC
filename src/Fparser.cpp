@@ -15,9 +15,9 @@ Fparser::Fparser(std::string fun_string) {
 
 double Fparser::EvaluateFun(double t, double y) {
 
-    auto *v = new double[2] {t,y};
+    double v[2] = {t,y};
     double val = this->rhs->Eval(v);
-    delete[] v;
+
     return val;
 }
 

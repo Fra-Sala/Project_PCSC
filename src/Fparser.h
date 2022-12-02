@@ -3,6 +3,7 @@
 //
 
 #include "AbstractParser.h"
+#include "fparser.hh"
 
 #ifndef PROJECT_PCSC_FPARSER_H
 #define PROJECT_PCSC_FPARSER_H
@@ -10,7 +11,7 @@
 class Fparser : public AbstractParser {
 
 private:
-    FunctionParser *rhs;
+    FunctionParser *rhs = new FunctionParser;
 
 public:
     Fparser(std::string fun_rhs);
