@@ -14,7 +14,7 @@ private:
     FunctionParser *rhs = new FunctionParser;
 
 public:
-    Fparser(std::string fun_rhs);
+    Fparser(std::string fun_rhs) : AbstractParser(fun_rhs) {this->rhs->Parse(this->funString, "t,y");}
     double EvaluateFun(double t, double y) override;
 
 };

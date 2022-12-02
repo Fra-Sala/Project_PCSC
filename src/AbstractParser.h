@@ -13,6 +13,7 @@ protected:
     std::string funString;
 
 public:
+    AbstractParser(std::string fun_rhs);
     virtual double EvaluateFun(double t, double y) = 0;
 
 };
