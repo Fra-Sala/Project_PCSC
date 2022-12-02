@@ -38,12 +38,12 @@ int main(int argc, char* argv[]) {
                      "\t\t dy/dt = f(t,y)\n"
                      "\t y in [t0, tf], y(t0) = y0\n";
 
-        std::cout << "Please choose a solving method:\n-1) forward euler\n- 2) AdamsBashforth\n";
+        std::cout << std::endl << "Please choose a solving method:\n-1) Forward Euler\n-2) AdamsBashforth\n";
 
         std::cin >> method;
         std::cin.ignore(1000,'\n');
 
-        std::cout << "Please enter f(t,y) with no spaces (only one string):";              // no quotation marks & no spaces
+        std::cout << "Please enter f(t,y): ";              // no quotation marks needed
 
 
         std::getline(std::cin, fun);
@@ -76,6 +76,8 @@ int main(int argc, char* argv[]) {
     Fparser fparser_obj(fun);
     Fparser* fparser_pointer = &fparser_obj;       // create a pointer to an object Fparser, which will be the function
 
+
+    // Here the equations are solved
     if(method == 1) {
         ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
         Eq.solve();
@@ -85,7 +87,11 @@ int main(int argc, char* argv[]) {
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
     } else if(method == 2) {
-        AdamsBashforth Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
+        int steps;
+        std::cout << "Select number of steps between 1 and 4: ";
+        std::cin >> steps;
+        assert(steps <= 4 && steps >= 1);
+        AdamsBashforth Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer, steps);
         Eq.solve();
         std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
         int num;

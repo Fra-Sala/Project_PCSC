@@ -15,12 +15,8 @@ private:
 
 public:
 
-    void SetSteps(const int steps) {
-        this->s = steps;
-    }
-
     AdamsBashforth(const double stepsize, const double initval, const double inittime, const double fintime,
-                   AbstractParser* fun_obj) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {}
+                   AbstractParser* fun_obj, int steps) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {s = steps;}
     void solve() override;
 };
 
