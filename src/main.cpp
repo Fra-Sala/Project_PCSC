@@ -92,6 +92,9 @@ int main(int argc, char* argv[]) {
         std::cin >> num;
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
+    } else if(method == 3) {
+
+        
     }
 
 
