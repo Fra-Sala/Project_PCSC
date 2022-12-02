@@ -27,8 +27,8 @@ public:
     // solution visualization, flag is for file output
     void VisualizeSolution(bool flag);
 
-    // fixed point algorithm for implicit
-    double FixedPoint(double x0, FunctionParser *phi, int nmax, double tol);
+    // fixed point algorithm for implicit equations
+    double FixedPoint(double t, double y, double nmax, double tol);
 
     // Virtual method
     virtual void solve() = 0;
