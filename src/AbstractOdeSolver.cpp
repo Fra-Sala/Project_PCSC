@@ -5,23 +5,24 @@
 #include <algorithm>
 #include <cmath>
 
+
 AbstractOdeSolver::AbstractOdeSolver() {
     this->h = 0.0;
     this->y0 = 0.0;
     this->t0 = 0.0;
     this->tf = 0.0;
-    this->rhs = nullptr;
+    this->funObject = nullptr;
     // the map in not initialized here
 }
 
 // customized constructor to initialize all variables
 AbstractOdeSolver::AbstractOdeSolver(const double stepsize, const double initval, const double inittime,
-                                     const double fintime, FunctionParser *f_rhs) {
+                                     const double fintime, AbstractParser *fun_obj) {
     this->h = stepsize;
     this->y0 = initval;
     this->t0 = inittime;
     this->tf = fintime;
-    this->rhs = f_rhs;
+    this->funObject = fun_obj;
 }
 
 // solution visualization

@@ -10,6 +10,8 @@
 #include <typeinfo>
 #include <cstring>
 #include <fparser.hh>
+#include "AbstractParser.h"
+#include "Fparser.h"
 
 
 
@@ -17,12 +19,14 @@
 // REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
 /////////////////////////
 
-using namespace std;                // we may use this too, so we don't have to write std:: every time
+
+
+
 
 int main(int argc, char* argv[]) {
 
 
-    auto *f_RHS = new FunctionParser;
+
     double t0, tf, h, y0;
     std::string fun;
     int method;
@@ -69,11 +73,11 @@ int main(int argc, char* argv[]) {
 
     }
 
-
-    f_RHS->Parse(fun, "t,y");       // create a pointer to an object FunctionParser, which will be the function
+    Fparser fparser_obj(fun);
+    Fparser* fparser_pointer = &fparser_obj;       // create a pointer to an object Fparser, which will be the function
 
     if(method == 1) {
-        ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, f_RHS);
+        ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
         Eq.solve();
         std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
         int num;
@@ -81,6 +85,7 @@ int main(int argc, char* argv[]) {
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
     }
+
 
 
 

@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include "fparser.hh"
+#include "AbstractParser.h"
 
 
 class AbstractOdeSolver {
@@ -13,7 +14,7 @@ protected:
     double y0;                                                  // initial value
     double t0;                                                  // initial time
     double tf;                                                  // final time
-    FunctionParser *rhs;                                        // pointer to rhs-function
+    AbstractParser* funObject;
     std::map<double, double> sol;                               // standard map containing the solution
 
     // Methods and constructors
@@ -21,7 +22,7 @@ public:
     // Constructors
     AbstractOdeSolver();
     AbstractOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
-                      FunctionParser *rhs);
+                     AbstractParser* fun_object);
 
     // solution visualization, flag is for file output
     void VisualizeSolution(bool flag);
