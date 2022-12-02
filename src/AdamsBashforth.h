@@ -14,6 +14,7 @@ private:
     int s;              // number of steps [0, 4]
 
 public:
+
     void SetSteps(const int steps) {
         this->s = steps;
     }

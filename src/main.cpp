@@ -84,7 +84,16 @@ int main(int argc, char* argv[]) {
         std::cin >> num;
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
+    } else if(method == 2) {
+        AdamsBashforth Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
+        Eq.solve();
+        std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+        int num;
+        std::cin >> num;
+        num--;                          // since bool must be 0 or 1
+        Eq.VisualizeSolution(num);
     }
+
 
 
 
