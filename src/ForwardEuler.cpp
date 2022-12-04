@@ -15,5 +15,6 @@ void ForwardEuler::solve() {
         double y = sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
         sol.emplace(t, y);
     }
+
 }
 

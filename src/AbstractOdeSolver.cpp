@@ -51,22 +51,21 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
 }
 
 
-double AbstractOdeSolver::FixedPoint(double t_new, double y, double nmax, double tol) {
 
 
-    double it = 0.0;
-    double err, y_new;
-    double y_old = y;
-    do {
+double AbstractOdeSolver::Broyden(double t_new, double y) {
 
-        y_new = y + this->h*this->funObject->EvaluateFun(t_new, y_old);
-        err = fabs(y_new - y_old);
-        it ++;
-        y_old = y_new;
+}
 
-    } while ((it < nmax) && (err > tol));
+double AbstractOdeSolver::SolveNonLinearEquation(double t, double y) {
 
-    return y_new;
+    int flag =1 ;
+    double y_sol;
+    if (flag == 1)
+    {
+        y_sol = this->FixedPoint(t,y);
+    }
+    return y_sol;
 }
 
 

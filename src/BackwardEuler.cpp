@@ -12,10 +12,29 @@ void BackwardEuler::solve() {
     for (int i = 0; i<=N; i++){
 
         double t_new = this->t0 + this->h * i;
-        double y = this->FixedPoint(t_new, sol.rbegin()->second, this->nmax, this->tol);
+        double y = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
 
         this->sol.emplace(t_new, y);
     }
 
+}
+
+
+double BackwardEuler::FixedPoint(double t_new, double y) {
+
+
+    double it = 0.0;
+    double err, y_new;
+    double y_old = y;
+    do {
+
+        y_new = y + this->h*this->funObject->EvaluateFun(t_new, y_old);
+        err = fabs(y_new - y_old);
+        it ++;
+        y_old = y_new;
+
+    } while ((it < this->nmax) && (err > this->tol));
+
+    return y_new;
 }
 
