@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
 
 
-        std::cout << "Please choose a solving method:\n-1) forward euler\n- 2) AdamsBashforth\n- 3) Backward Euler\n";
+        std::cout << "Please choose a solving method:\n1) Forward Euler\n2) AdamsBashforth\n3) Backward Euler\n";
 
 
         std::cin >> method;

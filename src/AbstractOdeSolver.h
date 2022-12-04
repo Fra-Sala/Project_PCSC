@@ -14,8 +14,6 @@ protected:
     double y0;                                                  // initial value
     double t0;                                                  // initial time
     double tf;                                                  // final time
-    double nmax;
-    double tol;
     AbstractParser* funObject;
     std::map<double, double> sol;                               // standard map containing the solution
 
@@ -28,11 +26,6 @@ public:
 
     // solution visualization, flag is for file output
     void VisualizeSolution(bool flag);
-
-    // fixed point algorithm for implicit equations
-    double SolveNonLinearEquation(double t, double y);
-    virtual double FixedPoint(double t, double y) = 0;
-    virtual double Broyden(double t, double y) = 0;
 
     // Virtual method
     virtual void solve() = 0;

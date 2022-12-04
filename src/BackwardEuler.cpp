@@ -22,7 +22,6 @@ void BackwardEuler::solve() {
 
 double BackwardEuler::FixedPoint(double t_new, double y) {
 
-
     double it = 0.0;
     double err, y_new;
     double y_old = y;
@@ -36,5 +35,13 @@ double BackwardEuler::FixedPoint(double t_new, double y) {
     } while ((it < this->nmax) && (err > this->tol));
 
     return y_new;
+}
+
+
+// to be implemented
+double BackwardEuler::Broyden(double t_new, double y) {
+
+
+    return 0;
 }
 
