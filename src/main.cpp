@@ -1,20 +1,23 @@
+// Standard c++ libraries
 #include <iostream>
 #include <fstream>
-
-#include "AdamsBashforth.h"
-#include "ForwardEuler.h"
 #include <cassert>
-#include "AbstractOdeSolver.h"
 #include <limits>
 #include <string>
 #include <typeinfo>
 #include <cstring>
+
+// Function parser used
 #include <fparser.hh>
 #include "AbstractParser.h"
 #include "Fparser.h"
+
+// Methods implemented
+#include "AbstractOdeSolver.h"
+#include "ForwardEuler.h"
+#include "AdamsBashforth.h"
 #include "BackwardEuler.h"
-
-
+#include "ExplicitRungeKutta.h"
 
 /////////////////////////
 // REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
@@ -23,9 +26,8 @@
 
 
 
-
+// Main
 int main(int argc, char* argv[]) {
-
 
 
     double t0, tf, h, y0;
@@ -41,7 +43,8 @@ int main(int argc, char* argv[]) {
 
 
 
-        std::cout << "Please choose a solving method:\n1) Forward Euler\n2) AdamsBashforth\n3) Backward Euler\n";
+        std::cout << "Please choose a solving method:\n1) Forward Euler\n2) AdamsBashforth\n3) Backward Euler\n"
+                     "4) Explicit Runge Kutta\n";
 
 
         std::cin >> method;
@@ -80,7 +83,6 @@ int main(int argc, char* argv[]) {
     Fparser fparser_obj(fun);
     Fparser* fparser_pointer = &fparser_obj;       // create a pointer to an object Fparser, which will be the function
 
-
     // Here the equations are solved
     if(method == 1) {
         ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
@@ -90,6 +92,7 @@ int main(int argc, char* argv[]) {
         std::cin >> num;
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
+
     } else if(method == 2) {
         int steps;
         std::cout << "Select number of steps between 1 and 4: ";
@@ -102,9 +105,11 @@ int main(int argc, char* argv[]) {
         std::cin >> num;
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
-    } else if(method == 3) {
 
-        BackwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer );
+    } else if(method == 3) {
+        // It is possible to specify tol and max_iter in the following constructor, otherwise default values will be
+        // considered
+        BackwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
 
         Eq.solve();
         std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
@@ -112,9 +117,21 @@ int main(int argc, char* argv[]) {
         std::cin >> num;
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
+
+    } else if (method == 4) {
+        int stages;
+        std::cout << "Select number of stages between 1 and 4: ";
+        std::cin >> stages;
+        ExplicitRungeKutta Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer, stages);
+
+        Eq.solve();
+        std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+        int num;
+        std::cin >> num;
+        num--;                          // since bool must be 0 or 1
+        Eq.VisualizeSolution(num);
+
     }
-
-
 
 
 
