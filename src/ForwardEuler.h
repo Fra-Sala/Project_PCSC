@@ -13,7 +13,7 @@ class ForwardEuler : public AbstractOdeSolver {
 
 public:
     ForwardEuler(const double stepsize, const double initval, const double inittime, const double fintime,
-                     AbstractParser* fun_obj) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {}
+                     AbstractParser* fun_obj) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {};
 
     void solve() override;
 
