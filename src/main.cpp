@@ -6,7 +6,7 @@
 #include <string>
 #include <typeinfo>
 #include <cstring>
-
+#include <fstream>
 // Function parser used
 #include <fparser.hh>
 #include <gtest/gtest.h>
@@ -31,13 +31,12 @@
 // Main
 int main(int argc, char* argv[]) {
 
-    int flagTest = 1;
-
-    if (flagTest == 1) {
-        ::testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-    }
-
+//    int flagTest = 1;
+//
+//    if (flagTest == 1) {
+//        ::testing::InitGoogleTest(&argc, argv);
+//        return RUN_ALL_TESTS();
+//    }
 
 
 
@@ -45,7 +44,20 @@ int main(int argc, char* argv[]) {
     std::string fun;
     int method;
 
-    if (argc == 1) {
+    // First scenario: the user runs the command ./Project_PCSC file name_of_file.txt    (or FILE in capital letters)
+    // Format of file: method fun t0 tf h y0 (e.g.:
+    if(strcmp(argv[1],"FILE") || strcmp(argv[1] ,"file")) {
+        std::ifstream fileInput(argv[2]);
+        assert(fileInput.is_open());
+        std::vector<std::string> words;
+
+
+        while(!fileInput.eof()) {
+            std::string word;
+            fileInput >> word;
+            words.push_back(word);
+        }
+    } else    if (argc == 1) {
 
         std::cout << "\t\t------------- Ode solver -------------\n\n"
                      "This program solves the Cauchy problem in the form:\n"

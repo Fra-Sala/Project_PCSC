@@ -10,9 +10,9 @@
 TEST(rungeKutta, rungeKutta4) {
 
     double h = 0.1;
-    double y0 = 0;
-    double t0 = 0;
-    double tf = 5;
+    double y0 = 0.0;
+    double t0 = 0.0;
+    double tf = 5.0;
     std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
     Fparser fparser_obj(fun);
     Fparser* fparser_pointer = &fparser_obj;       // create a pointer to an object Fparser, which will be the function
