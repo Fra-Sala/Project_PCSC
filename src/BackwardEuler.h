@@ -30,8 +30,7 @@ public:
     void solve() override;
 
     // Here we override the methods inherited from AbstractImplicitOdeSolver
-    double FixedPoint(double t, double y) override;
-    double Broyden(double t, double y) override;
+    double NonLinearEquation(double t, double y) override;
 
 };
 #endif //PROJECT_PCSC_BACKWARDEULER_H

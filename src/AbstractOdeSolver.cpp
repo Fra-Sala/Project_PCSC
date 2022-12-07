@@ -44,7 +44,7 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
 
     } else {
 
-        std::cout << "The solution will be displayed below" << std::endl << std::endl << "t " << "y" << std::endl;
+        std::cout << "The solution is the following:" << std::endl << std::endl << "t " << "y" << std::endl;
         std::for_each(sol.begin(), sol.end(), [](auto& map) {std::cout << map.first << " " << map.second << std::endl;});
 
     }
