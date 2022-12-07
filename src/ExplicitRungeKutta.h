@@ -18,8 +18,9 @@ private:
 
 public:
     ExplicitRungeKutta(const double stepsize, const double initval, const double inittime, const double fintime,
-                   AbstractParser* fun_obj, int choice) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {stages = choice;}
+                   AbstractParser* fun_obj, int choice) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->stages = choice;}
     void solve() override;
+
 };
 
 #endif //PROJECT_PCSC_EXPLICITRUNGEKUTTA_H

@@ -29,6 +29,8 @@ public:
 
     // Virtual method
     virtual void solve() = 0;
+
+    std::map<double,double>* GetSolution();
 };
 
 #endif //PROJECT_SALA_VISCUSI_ABSTRACTODESOLVER_H

@@ -9,6 +9,7 @@
 
 // Function parser used
 #include <fparser.hh>
+#include <gtest/gtest.h>
 #include "AbstractParser.h"
 #include "Fparser.h"
 
@@ -28,6 +29,15 @@
 
 // Main
 int main(int argc, char* argv[]) {
+
+    int flagTest = 1;
+
+    if (flagTest == 1) {
+        ::testing::InitGoogleTest(&argc, argv);
+        return RUN_ALL_TESTS();
+    }
+
+
 
 
     double t0, tf, h, y0;

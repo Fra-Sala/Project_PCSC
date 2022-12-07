@@ -50,3 +50,7 @@ void AbstractOdeSolver::VisualizeSolution(bool flag) {
     }
 }
 
+std::map<double, double> *AbstractOdeSolver::GetSolution() {
+    return &this->sol;
+}
+
