@@ -18,6 +18,7 @@
 #include "AdamsBashforth.h"
 #include "BackwardEuler.h"
 #include "ExplicitRungeKutta.h"
+#include "BDFSchemes.h"
 
 /////////////////////////
 // REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
@@ -44,7 +45,7 @@ int main(int argc, char* argv[]) {
 
 
         std::cout << "Please choose a solving method:\n1) Forward Euler\n2) AdamsBashforth\n3) Backward Euler\n"
-                     "4) Explicit Runge Kutta\n";
+                     "4) Explicit Runge Kutta\n5) BDF schemes\n";
 
 
         std::cin >> method;

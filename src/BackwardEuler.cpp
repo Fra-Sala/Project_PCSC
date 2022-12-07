@@ -16,8 +16,8 @@ void BackwardEuler::solve() {
 
         this->sol.emplace(t_new, y);
     }
-
 }
+
 
 
 double BackwardEuler::FixedPoint(double t_new, double y) {
@@ -36,6 +36,7 @@ double BackwardEuler::FixedPoint(double t_new, double y) {
 
     return y_new;
 }
+
 
 
 // to be implemented

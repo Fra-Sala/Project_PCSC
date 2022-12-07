@@ -13,7 +13,9 @@ add_subdirectory(googletest)
 #add_subdirectory(fparser4.5.2)
 
 
-add_executable(Project_PCSC src/main.cpp src/AbstractOdeSolver.cpp src/AbstractImplicitOdeSolver.cpp src/ForwardEuler.cpp src/AdamsBashforth.cpp src/ExplicitRungeKutta.cpp src/AbstractParser.cpp src/Fparser.cpp src/BackwardEuler.h src/BackwardEuler.cpp)
+add_executable(Project_PCSC src/main.cpp src/AbstractOdeSolver.cpp src/AbstractImplicitOdeSolver.cpp src/ForwardEuler.cpp
+        src/AdamsBashforth.cpp src/ExplicitRungeKutta.cpp src/AbstractParser.cpp src/Fparser.cpp src/BackwardEuler.h
+        src/BackwardEuler.cpp src/BDFSchemes.cpp)
 
 #target_link_directories(Project_PCSC PRIVATE fparser4.5.2)
 
