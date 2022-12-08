@@ -20,6 +20,7 @@
 #include "BackwardEuler.h"
 #include "ExplicitRungeKutta.h"
 #include "BDFSchemes.h"
+#include "AdamsMoulton.h"
 
 /////////////////////////
 // REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
@@ -29,7 +30,7 @@
 
 
 // Main
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
 
 //    int flagTest = 1;
 //
@@ -55,13 +56,12 @@ int main(int argc, char* argv[]) {
                      "\t y in [t0, tf], y(t0) = y0\n";
 
 
-
-        std::cout << "Please choose a solving method:\n1) Forward Euler\n2) AdamsBashforth\n3) Backward Euler\n"
-                     "4) Explicit Runge Kutta\n5) BDF schemes\n";
+        std::cout << "Please choose a solving method:\n1) Forward Euler\n2) Adams-Bashforth\n3) Backward Euler\n"
+                     "4) Explicit Runge Kutta\n5) BDF schemes\n6) Adams-Moulton\n";
 
 
         std::cin >> method;
-        std::cin.ignore(1000,'\n');
+        std::cin.ignore(1000, '\n');
 
         std::cout << "Please enter f(t,y): ";              // no quotation marks needed
 
@@ -83,21 +83,21 @@ int main(int argc, char* argv[]) {
 
     } else {
 
-    // the user can also run the program declaring "method", "f(t,y)", t0, tf,  h, y0
+        // the user can also run the program declaring "method", "f(t,y)", t0, tf,  h, y0
         method = (double) atof(argv[1]);
         fun = argv[2];
         t0 = (double) atof(argv[3]);
-        tf =(double) atof(argv[4]);
-        h =  (double) atof(argv[5]);
+        tf = (double) atof(argv[4]);
+        h = (double) atof(argv[5]);
         y0 = (double) atof(argv[6]);
 
     }
 
     Fparser fparser_obj(fun);
-    Fparser* fparser_pointer = &fparser_obj;       // create a pointer to an object Fparser, which will be the function
+    Fparser *fparser_pointer = &fparser_obj;       // create a pointer to an object Fparser, which will be the function
 
     // Here the equations are solved
-    if(method == 1) {
+    if (method == 1) {
         ForwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
         Eq.solve();
         std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
@@ -106,7 +106,7 @@ int main(int argc, char* argv[]) {
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
 
-    } else if(method == 2) {
+    } else if (method == 2) {
         int steps;
         std::cout << "Select number of steps between 1 and 4: ";
         std::cin >> steps;
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
 
-    } else if(method == 3) {
+    } else if (method == 3) {
         // It is possible to specify tol and max_iter in the following constructor, otherwise default values will be
         // considered
         BackwardEuler Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer);
@@ -144,10 +144,20 @@ int main(int argc, char* argv[]) {
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
 
+    } else if (method == 6) {
+        int stages;
+        std::cout << "Select number of stages between 1 and 4: ";
+        std::cin >> stages;
+        AdamsMoulton Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer, stages);
+
+        Eq.solve();
+        std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+        int num;
+        std::cin >> num;
+        num--;                          // since bool must be 0 or 1
+        Eq.VisualizeSolution(num);
+
     }
-
-
-
 
 
     return 0;

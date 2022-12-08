@@ -23,10 +23,8 @@ public:
                               AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->tol = tolmax, this->nmax = max_iter, this->a = 0.0, this->b = 0.0;}
 
     // fixed point algorithm for implicit equations
-    virtual double NonLinearEquation(double t, double y) = 0;
+    double NonLinearEquation(double t, double y) ;
     // virtual methods that are to be overridden in each implicit method
-
-
 
     double SolveNonLinearEquation(double t, double y);
 
