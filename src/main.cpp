@@ -144,6 +144,18 @@ int main(int argc, char *argv[]) {
         num--;                          // since bool must be 0 or 1
         Eq.VisualizeSolution(num);
 
+    } else if (method == 5) {
+        int stages;
+        std::cout << "Select number of stages between 1 and 4: ";
+        std::cin >> stages;
+        BDFSchemes Eq((double) h, (double) y0, (double) t0, (double) tf, fparser_pointer, stages);
+
+        Eq.solve();
+        std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+        int num;
+        std::cin >> num;
+        num--;                          // since bool must be 0 or 1
+        Eq.VisualizeSolution(num);
     } else if (method == 6) {
         int stages;
         std::cout << "Select number of stages between 1 and 4: ";

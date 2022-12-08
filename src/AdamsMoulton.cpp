@@ -6,8 +6,8 @@
 #include "AdamsMoulton.h"
 #include <iostream>
 
-/*The solve() method of this class applies the Adams-Moulton multistep method using the speciefied number of steps.
- * For the intial steps, the very same Adams-Moulton method is called, using an increasing number of steps, until
+/* The ::solve() method of this class applies the Adams-Moulton multistep method using the speciefied number of steps.
+ * For the initial steps, the very same Adams-Moulton method is called, using an increasing number of steps, until
  * a sufficient number of y_i has been computed in order to apply the chosen method. */
 
 void AdamsMoulton::solve() {
@@ -20,20 +20,17 @@ void AdamsMoulton::solve() {
     for (int i = 1; i < this->steps; i++) {
         double y = this->AdamsMoultonNstep(i);
         sol.emplace(this->sol.rbegin()->first + this->h, y);
-        std::cout << "entro qua " << i << "volte" << std::endl;
     }
 
-    std::cout << "I have computed the first " << this->steps - 1 << " solutions with lower-order Adams-Moulton"
-              << std::endl;
 
 // Now, depending on the particular numbers of steps,
 // a different implementation of Adams-Bashforth method is applied
-    // this would simply be forward Euler
+
     for (int i = this->steps; i <= N; i++) {
 
         double y = this->AdamsMoultonNstep(this->steps);
         sol.emplace(this->sol.rbegin()->first + this->h, y);
-        std::cout << "i have computed a new y: " << y << std::endl;
+
     }
 
 
