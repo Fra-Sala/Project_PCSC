@@ -18,8 +18,6 @@ void AdamsBashforth::solve() {
         sol.emplace(t, y);
     }
 
-    std::cout << "I have computed the first " << s << " solutions with Forward Euler" << std::endl;
-
 // Now, depending on the particular numbers of steps,
 // a different implementation of Adams-Bashforth method is applied
     if (s == 1) {                                                           // this would simply be forward Euler
@@ -34,8 +32,6 @@ void AdamsBashforth::solve() {
             double y = sol.rbegin()->second + h * (3.0 / 2.0 * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
                                                 - 0.5 *
                                                 this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second));
-
-            std::cout << y << std::endl;
             sol.emplace(t, y);
         }
     } else if (s == 3) {
@@ -62,3 +58,4 @@ void AdamsBashforth::solve() {
         }
     }
 }
+
