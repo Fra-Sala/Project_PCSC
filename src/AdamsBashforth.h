@@ -15,7 +15,8 @@ private:
 
 public:
     AdamsBashforth(const double stepsize, const double initval, const double inittime, const double fintime,
-                   AbstractParser* fun_obj, int nSteps) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->steps = nSteps;};
+                   AbstractParser* fun_obj, unsigned int nSteps) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->steps = nSteps;};
+
     void solve() override;
 };
 

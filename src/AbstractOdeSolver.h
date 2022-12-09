@@ -25,12 +25,13 @@ public:
                      AbstractParser* fun_object);
 
     // solution visualization, flag is for file output
-    void VisualizeSolution(bool flag);
+    void VisualizeSolution();
 
     // Virtual method
     virtual void solve() = 0;
 
     std::map<double,double>* GetSolution();
+
 };
 
 #endif //PROJECT_SALA_VISCUSI_ABSTRACTODESOLVER_H

@@ -12,6 +12,7 @@ AbstractOdeSolver::AbstractOdeSolver() {
     this->t0 = 0.0;
     this->tf = 0.0;
     this->funObject = nullptr;
+
     // the map in not initialized here
 }
 
@@ -26,7 +27,13 @@ AbstractOdeSolver::AbstractOdeSolver(const double stepsize, const double initval
 }
 
 // solution visualization
-void AbstractOdeSolver::VisualizeSolution(bool flag) {
+void AbstractOdeSolver::VisualizeSolution() {
+
+    std::cout << "Where would you like to print the solution?\n1) Screen\n2) Matlab file\n";
+    int flag;
+    std::cin >> flag;
+    flag--;                          // since flag must be 0 or 1
+
     if (flag) {
         std::ofstream write_sol("solution.m");
 
