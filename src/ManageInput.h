@@ -24,11 +24,12 @@
 #include "BackwardEuler.h"
 #include "ExplicitRungeKutta.h"
 #include "BDFSchemes.h"
+#include "AdamsMoulton.h"
 
 class ManageInput {
 
 private:
-    unsigned int method;
+    int method;
     double t0;
     double tf;
     double y0;
@@ -36,10 +37,14 @@ private:
     std::string fun;
 
     // For multisteps methods
-    unsigned int s = 0;
+    int s = 0;
 
     // For Runge-Kutta methods
-    unsigned int stages = 0;
+    int stages = 0;
+
+    // For implicit methods in general
+    double nmax;
+    double tol;
 
 public:
     ManageInput(int Nargs, const char* args[]);

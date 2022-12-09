@@ -4,12 +4,6 @@
 #include <gtest/gtest.h>
 #include "ManageInput.h"
 #include "AbstractOdeSolver.h"
-#include "ForwardEuler.h"
-#include "AdamsBashforth.h"
-#include "BackwardEuler.h"
-#include "ExplicitRungeKutta.h"
-#include "BDFSchemes.h"
-#include "AdamsMoulton.h"
 
 
 /////////////////////////

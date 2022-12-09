@@ -15,7 +15,7 @@ private:
     int steps;
 
 public:
-    // Customized constructor inherited drom AbstractImplicitOdeSolver
+    // Customized constructor inherited from AbstractImplicitOdeSolver
     BDFSchemes(const double stepsize, const double initval, const double inittime, const double fintime,
                   AbstractParser* fun_obj, int nSteps, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tolmax, max_iter) {this->steps = nSteps;};
 
