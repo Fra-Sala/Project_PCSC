@@ -22,7 +22,7 @@ add_subdirectory(googletest)
 
 add_executable(Project_PCSC src/main.cpp src/AbstractOdeSolver.cpp src/AbstractImplicitOdeSolver.cpp src/ForwardEuler.cpp
         src/AdamsBashforth.cpp src/ExplicitRungeKutta.cpp src/AbstractParser.cpp src/Fparser.cpp src/BackwardEuler.cpp
-        src/BDFSchemes.cpp src/AdamsMoulton.cpp test/test.cc src/ManageInput.cpp)
+        src/BDFSchemes.cpp src/AdamsMoulton.cpp test/test.cc src/ManageInput.cpp src/NonLinearEqException.h)
 
 
 #add_executable(GoogleTest test/test.cc)
