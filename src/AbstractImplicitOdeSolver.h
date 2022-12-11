@@ -86,6 +86,7 @@ public:
     */
     double Broyden(double t, double y);
 
+
 };
 
 #endif //PROJECT_PCSC_ABSTRACTIMPLICITODESOLVER_H

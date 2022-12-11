@@ -4,7 +4,8 @@
 
 #include <iostream>
 #include "AbstractImplicitOdeSolver.h"
-#include "NonLinearEqException.h"
+#include "Exception.h"
+
 
 
 double AbstractImplicitOdeSolver::NonLinearEquation(double t, double y) {
@@ -16,8 +17,12 @@ double AbstractImplicitOdeSolver::SolveNonLinearEquation(double t, double y) {
     double ySol;
     try {
         ySol = FixedPoint(t,y);
-    } catch(NonLinearEqException& e) {
-        std::cout << e.what() << std::endl;
+
+    }
+    catch(Exception& e)
+    {
+        std::cout << e.what() <<std::endl;
+
         ySol = Broyden(t,y);
     }
     return ySol;
@@ -35,8 +40,11 @@ double AbstractImplicitOdeSolver::FixedPoint(double t, double y) {
         it ++ ;
         y_old = y_new;
 
-        if(it > 3 && (errVect.back() > errVect.back()-1) && (errVect.back()-1 > errVect.back()-2)) {
-            throw NonLinearEqException();
+
+        if(it > 3 && (errVect.back() > errVect.back()-1) && (errVect.back()-1 > errVect.back()-2))
+        {
+            throw Exception("Warning: fixed point is not converging, switching to Broyden solver\n");
+
         }
     } while ((it < this->nmax) && (errVect.back() > this->tol));
     return y_new;
