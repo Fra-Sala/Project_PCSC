@@ -6,13 +6,15 @@
 #include "AbstractOdeSolver.h"
 
 
-/////////////////////////
-// REMEMBER TO RUN THE CODE, AFTER COMPILING, FROM THE TERMINAL!!!!!
-/////////////////////////
-
+/** @brief
+ *      This is the main
+ *
+ * @param[in] argc
+ * @param[in] argv
+ * @return
+ */
 
 int main(int argc, const char* argv[]) {
-
 
 //    int flagTest = 1;
 //
@@ -20,7 +22,6 @@ int main(int argc, const char* argv[]) {
 //        ::testing::InitGoogleTest(&argc, argv);
 //        return RUN_ALL_TESTS();
 //    }
-
 
     ManageInput ode(argc, argv);
     AbstractOdeSolver *ptr = ode.ConstructSolver();

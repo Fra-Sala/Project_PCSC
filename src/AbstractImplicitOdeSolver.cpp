@@ -6,48 +6,44 @@
 #include "AbstractImplicitOdeSolver.h"
 #include "NonLinearEqException.h"
 
-double AbstractImplicitOdeSolver::SolveNonLinearEquation(double t, double y) {
 
+double AbstractImplicitOdeSolver::NonLinearEquation(double t, double y) {
+    return (y + this->a + this->b*this->funObject->EvaluateFun(t,y));
+}
+
+
+double AbstractImplicitOdeSolver::SolveNonLinearEquation(double t, double y) {
     double ySol;
-    try
-    {
+    try {
         ySol = FixedPoint(t,y);
-    }
-    catch(NonLinearEqException& e)
-    {
-        std::cout << e.what() <<std::endl;
+    } catch(NonLinearEqException& e) {
+        std::cout << e.what() << std::endl;
         ySol = Broyden(t,y);
     }
     return ySol;
-
 }
 
 
 double AbstractImplicitOdeSolver::FixedPoint(double t, double y) {
-
     double it = 0.0;
     double y_new;
     double y_old = y;
     std::vector<double> errVect;
-    do
-    {
+    do {
         y_new = y_old - this->NonLinearEquation(t,y_old);
         errVect.push_back(fabs(y_new - y_old));
         it ++ ;
         y_old = y_new;
 
-        if(it > 3 && (errVect.back() > errVect.back()-1) && (errVect.back()-1 > errVect.back()-2))
-        {
+        if(it > 3 && (errVect.back() > errVect.back()-1) && (errVect.back()-1 > errVect.back()-2)) {
             throw NonLinearEqException();
         }
     } while ((it < this->nmax) && (errVect.back() > this->tol));
-
-
     return y_new;
 }
 
-double AbstractImplicitOdeSolver::Broyden(double t, double y) {
 
+double AbstractImplicitOdeSolver::Broyden(double t, double y) {
     double it = 0;
     double y_oldold = y;
     double y_old = y_oldold+this->h;
@@ -64,9 +60,4 @@ double AbstractImplicitOdeSolver::Broyden(double t, double y) {
     return y_new;
 }
 
-
-double AbstractImplicitOdeSolver::NonLinearEquation(double t, double y) {
-
-    return (y + this->a + this->b*this->funObject->EvaluateFun(t,y));    // this is the f(y) for which we look for y such that f(y)=0
-}
 
