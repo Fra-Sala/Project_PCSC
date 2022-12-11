@@ -30,7 +30,7 @@ public:
 
     double FixedPoint(double t, double y);
     double Broyden(double t, double y);
-    //double Bisection(double t, double y);
+
 
 };
 

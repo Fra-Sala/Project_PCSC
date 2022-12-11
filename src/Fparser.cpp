@@ -11,4 +11,10 @@ double Fparser::EvaluateFun(double t, double y) {
     return val;
 }
 
+Fparser::~Fparser() {
+
+    delete this->rhs;
+
+}
+
 
