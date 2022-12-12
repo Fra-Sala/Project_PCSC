@@ -19,17 +19,39 @@
 
 #include "AbstractImplicitOdeSolver.h"
 
+/*! \class BackwardEuler class
+    \brief Class derived from AbstractImplicitOdeSolver. Implicit Euler method to solve ODE
+
+    This class features the backward Euler algorithm.
+*/
+
 class BackwardEuler : public AbstractImplicitOdeSolver {
 
 public:
-    // Customized constructor inherited drom AbstractImplicitOdeSolver
+    //! Customized constructor inherited from AbstractImplicitOdeSolver.
+    /*!
+      This customized constructor allows to initialize all the members contained in the mother class, apart from the
+      standard map containing the solution. Here, the number of steps desired is to be specified too. The value of tolerance
+      tol and maximum number of iterations max_iter (stopping criteria for the nonlinear equation solver) can be either specified,
+      or left as default values (tol = 1e-8, max_iter = 1000).
+    */
     BackwardEuler(const double stepsize, const double initval, const double inittime, const double fintime,
                    AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tolmax, max_iter) {};
 
-    // Here we override the method inherited from AbstractOdeSolver
+    /*! This method applies the Backward Euler algorithm, as follows:
+    *
+    *  \f$y_{n+1} = y_n + hf(t_{n+1}, y_{n+1})    \f$
+     *
+     * Hence at each time step a non-linear equation needs to be solved. Therefore
+     * members \f$a \f$ and \f$b \f$ which characterize the equation at each time step
+     * are set as \f$  a = - y_n  \f$ and \f$ b = -h \f$.
+     * \see SolveNonLinearEquation()
+     * @param
+     * @return the solution of the nonlinear equation at timestep \f$t_{n+1}\f$.
+     */
     void solve() override;
 
-    // Here we override the methods inherited from AbstractImplicitOdeSolver
+
 
 
 };

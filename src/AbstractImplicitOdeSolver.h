@@ -35,17 +35,19 @@ public:
     AbstractImplicitOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
                               AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->tol = tolmax, this->nmax = max_iter, this->a = 0.0, this->b = 0.0;};
 
-    /** This method sets the \f$f(y)\f$ for which we look for \f$y\f$ such that \f$f(y)=0\f$. It takes two arguments
-     * and returns a double value.
-     * @param t is the new timestep corresponding with the \f$y\f$ value we are looking for.
+    /** This method evaluates the \f$g(y_{n+1})\f$, LHS of the nonlinear equation \f$g(y)=0\f$. It takes two arguments
+     * and returns a double value. We exploit the fact that the general \f$g(y) \f$ is in the form \f$g(y) = y_{n+1} + a + b \cdot f(t_{n+1}, y_{n+1})\f$.
+     * @param t is the new timestep \f$ t_{n+1} \f$
      * @param y is the unknown of the non-linear equation.
-     * @return a double variable containing the non-linear equation.
+     * @return a double variable containing the evaluation of the non-linear equation at current \f$ y\f$ and at \f$t = t_{n+1} \f$.
     */
     double NonLinearEquation(double t, double y) ;
 
-    /** This method tries to solve the non-linear equation with the algorithms implemented. If it fails, it throws
-     * an exception that switches the algorithm.
+    /** This method tries to solve the non-linear equation using the implemented algorithms. The first algorithm tried is fixed point iterations
+     * and, if such method fails to converge, an exception is thrown and Broyden algorithm is used.
      * \see NonLinearEquation()
+     * \see FixedPoint()
+     * \see Broyden()
      * @param t is the new timestep corresponding with the \f$y\f$ value we are looking for.
      * @param y is the unknown of the non-linear equation.
      * @return the solution of the nonlinear equation \f$ySol\f$.
