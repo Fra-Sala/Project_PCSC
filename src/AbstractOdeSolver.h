@@ -20,7 +20,7 @@ protected:
     double y0;                                                  ///< initial value
     double t0;                                                  ///< initial time
     double tf;                                                  ///< final time
-    AbstractParser* funObject;                                  ///< rhs of ODE
+    AbstractParser* funObject;                                  ///< rhs of the ODE
     std::map<double, double> sol;                               ///< standard map containing the solution
 
 public:

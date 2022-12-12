@@ -4,7 +4,6 @@
 
 #include "ManageInput.h"
 
-/// Here the user will be guided through the code and asked to insert inputs
 ManageInput::ManageInput(int Nargs, const char* args[]) {
 
     if (Nargs == 1) {
@@ -36,14 +35,17 @@ ManageInput::ManageInput(int Nargs, const char* args[]) {
         std::cout << "Please enter an initial value y0: ";
         std::cin >> y0;
 
-        // If the method is a multistep method, we look for a number of steps between 1 and 4 too
-        // or, if the method is the Runge-Kutta, we look for the number of stages
-        if (method == 2 || method == 5 || method == 6) {
+        // If the method is a multistep method, we look for a number of steps between 1 and 4 (between 1 and 3 if
+        // BDFSchemes) too. Alternatively, if the method is the Runge-Kutta, we look for the number of stages
+        if (method == 2 || method == 6) {
             std::cout << "Please enter the number of steps (1-4): ";
             std::cin >> s;
+        } else if (method == 5) {
+            std::cout << "Please enter the number of steps (1-3): ";
+            std::cin >> s;
         } else if (method == 4) {
-            std::cout << "Please enter the number of stages (1-4): ";
-            std::cin >> stages;
+                std::cout << "Please enter the number of stages (1-4): ";
+                std::cin >> stages;
         }
 
     } else if (strcmp(args[1], "FILE") == 0 || strcmp(args[1], "file") == 0) {
@@ -73,7 +75,6 @@ ManageInput::ManageInput(int Nargs, const char* args[]) {
         } else if (method == 4) {
             stages = atoi(args[7]);
         }
-
     }
 }
 

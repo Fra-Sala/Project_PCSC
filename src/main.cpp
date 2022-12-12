@@ -1,17 +1,14 @@
 // Libraries and headers
-#include <iostream>
 #include <cassert>
 #include <gtest/gtest.h>
 #include "ManageInput.h"
 #include "AbstractOdeSolver.h"
 
 
-/** @brief
- *      This is the main
+/** @brief This is the main.
  *
- * @param[in] argc
- * @param[in] argv
- * @return
+ * @param argc number of arguments specified when the program is run.
+ * @param argv actual arguments specified on the command line.
  */
 
 int main(int argc, const char* argv[]) {
@@ -28,8 +25,6 @@ int main(int argc, const char* argv[]) {
     assert(ptr);
     ptr->solve();
     ptr->VisualizeSolution();
-
-    return 0;
 }
 
 

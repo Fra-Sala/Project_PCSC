@@ -3,7 +3,6 @@
 //
 
 #include "AdamsBashforth.h"
-#include <iostream>
 
 void AdamsBashforth::solve() {
 

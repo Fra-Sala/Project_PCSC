@@ -2,7 +2,6 @@
 // Created by parallels on 12/4/22.
 //
 
-// this class inherits from AbstractOdeSolver and is required for all the implicit methods
 
 #ifndef PROJECT_PCSC_ABSTRACTIMPLICITODESOLVER_H
 #define PROJECT_PCSC_ABSTRACTIMPLICITODESOLVER_H
@@ -10,7 +9,7 @@
 #include "AbstractOdeSolver.h"
 
 /*! \class AbstractImplicitOdeSolver
-    \brief Daughter class of AbstractOdeSolver for every implemented implicit method to solve an ODE.
+    \brief Daughter class of AbstractOdeSolver required for every implemented implicit method to solve an ODE.
 
     This class is Abstract. It allows to initialize every field common to the different implicit methods that will be
     implemented in daughter classes.
@@ -36,8 +35,9 @@ public:
     AbstractImplicitOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
                               AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->tol = tolmax, this->nmax = max_iter, this->a = 0.0, this->b = 0.0;};
 
-    /** This method sets the f(y) for which we look for y such that f(y)=0. It takes two arguments and returns a double value.
-     * @param t is the new timestep corresponding with the 'y' value we are looking for.
+    /** This method sets the \f$f(y)\f$ for which we look for \f$y\f$ such that \f$f(y)=0\f$. It takes two arguments
+     * and returns a double value.
+     * @param t is the new timestep corresponding with the \f$y\f$ value we are looking for.
      * @param y is the unknown of the non-linear equation.
      * @return a double variable containing the non-linear equation.
     */
@@ -46,9 +46,9 @@ public:
     /** This method tries to solve the non-linear equation with the algorithms implemented. If it fails, it throws
      * an exception that switches the algorithm.
      * \see NonLinearEquation()
-     * @param t is the new timestep corresponding with the 'y' value we are looking for.
+     * @param t is the new timestep corresponding with the \f$y\f$ value we are looking for.
      * @param y is the unknown of the non-linear equation.
-     * @return the solution of the nonlinear equation ySol.
+     * @return the solution of the nonlinear equation \f$ySol\f$.
     */
     double SolveNonLinearEquation(double t, double y);
 
@@ -56,7 +56,7 @@ public:
     /** \brief Algorithm of fixed point iterations.
      *
      * It is used in SolveNonLinearEquation. The method tries to solve the non-linear equation by
-     * finding the fixed point of the iteration function \f$ \phi(x) = x - f(x) \f$. Stopping criteria are:
+     * finding the fixed point of the iteration function \f$\phi(x) = x - f(x)\f$. Stopping criteria are:
      *
      * 1) max iterations allowed reached;
      *
@@ -65,9 +65,9 @@ public:
      * Moreover, if the error is incresing, i.e. the algorithm is diverging, an exception is thrown and the algorithm
      * is interrupted.
      * \see SolveNonLinearEquation()
-     * @param t is the new timestep corresponding with the 'y' value we are looking for.
+     * @param t is the new timestep corresponding with the \f$y\f$ value we are looking for.
      * @param y is the unknown of the non-linear equation.
-     * @return the solution of the nonlinear equation ySol.
+     * @return the solution of the nonlinear equation \f$ySol\f$.
     */
     double FixedPoint(double t, double y);
 
@@ -80,9 +80,9 @@ public:
      *
      * 2) tolerance on the difference between two subsequent iterates is reached.
      * \see SolveNonLinearEquation()
-     * @param t is the new timestep corresponding with the 'y' value we are looking for.
+     * @param t is the new timestep corresponding with the \f$y\f$ value we are looking for.
      * @param y is the unknown of the non-linear equation.
-     * @return the solution of the nonlinear equation ySol.
+     * @return the solution of the nonlinear equation \f$ySol\f$.
     */
     double Broyden(double t, double y);
 

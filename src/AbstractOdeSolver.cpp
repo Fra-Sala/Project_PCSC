@@ -3,8 +3,6 @@
 #include <iostream>
 #include <cassert>
 #include <algorithm>
-#include <cmath>
-
 
 AbstractOdeSolver::AbstractOdeSolver() {
     this->h = 0.0;

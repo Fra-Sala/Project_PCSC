@@ -38,7 +38,7 @@ void ExplicitRungeKutta::solve() {
         }
 
     } else if (stages == 3) {
-        // As three stages Runge Kutta, we chose Third-order Strong Stability Preserving Runge-Kutta (SSPRK3)
+        // As three stages Runge Kutta, we chose the Third-order Strong Stability Preserving Runge-Kutta (SSPRK3)
         for (int i = 1; i <= N; i++) {
             double t = t0 + h * i;
 
