@@ -59,12 +59,12 @@ At this point, the executable (Project_PCSC) may be run in three different ways,
 
 
 ## To produce documentation 
-In order to produce the documentation of the project, please make sure that [Doxygen](https://www.doxygen.nl/) is installed on your machine. If not, open a terminal and type (for Ubuntu):
+In order to produce the documentation of the project, please make sure that [Doxygen](https://www.doxygen.nl/) is installed on your machine. If not, open a terminal and type (for *Ubuntu*):
 ```
 sudo apt-get update
 sudo apt-get install doxygen
 ```
-once Doxygen is installed, documentation can be generated either by typing
+once *Doxygen* is installed, documentation can be generated either by typing
 ```
 doxygen
 ```
@@ -72,11 +72,11 @@ in a terminal window in the project repository (this will cause all the target f
 ```
 sudo apt-get install doxygen-gui
 ```
-Thus, Doxywizard can be run as follows:
+Thus, *Doxywizard* can be run as follows:
 ```
 doxywizard
 ```
-In the window that will appear it will be possible to specify the working directory from which Doxygen will run and the directory where Doxygen will put the generated documentation. Once the process is completed, two new directories will be visible:
+In the window that will appear it will be possible to specify the working directory from which *Doxygen* will run and the directory where *Doxygen* will put the generated documentation. Once the process is completed, two new directories will be visible:
 
 * html;
 * latex.
@@ -106,10 +106,11 @@ The parameters of the problem of interest can be specified in 3 different ways:
 
 2) As specified from command line: the user can run the executable specifying from command line all the required parameters. A format for the call would be:
 				   ./Project_PCSC method "f(t,y)" t0 tf y0 h steps/stages tol nmax
-				   where method is an integer from 1 to 6 as listes above, steps/stages are required only for method 2,4,5,6, tol and nmax can be omitted.
+				   where method is an integer from 1 to 6 as listes above, steps/stages are required only for method 2,4,5,6, tol and nmax can be omitted. Note the quotation marks on f(t, y).
 				   
 3) As specified from file: the user can run the executable as follows:
-				./Project_PCSC file "name_of_file.txt" , where name_of_file.txt is a text file formatted as follows:
+				./Project_PCSC file "name_of_file.txt", where 
+				name_of_file.txt is a text file formatted as follows:
 				
 				--------- in "name_of_file.txt" --------------
 				method f(t,y) t0 tf y0 h steps/stages tol nmax
@@ -132,7 +133,7 @@ Both methods are iterative, which means that a stopping criteria must be chosen.
 The user can decide to visualize the solution of the ODE in two ways:
 
 * let the program print the solution to the screen (two columns format);
-* let the program produce a [MATLAB](https://www.mathworks.com/products/matlab.html) file, where the solution is plotted and visualized. In this case, make sure MATLAB is installed on your device.
+* let the program produce a [MATLAB](https://www.mathworks.com/products/matlab.html) file, where the solution is plotted and visualized. In this case, make sure *MATLAB* is installed on your device.
 
 
 
