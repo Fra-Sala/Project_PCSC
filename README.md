@@ -55,28 +55,28 @@ once the repository has been cloned, to run the code please open a terminal in t
 ```
 cd cmake-build-debug
 ```
-At this point, the executable (Project_PCSC) may be run in three different ways, as explained in [Parameters].
+At this point, the executable (Project_PCSC) may be run in three different ways, as explained in Parameters section.
 
 
 ## To produce documentation 
-In order to produce the documentation of the project, please make sure that [Doxygen] is installed on your machine. If not, open a terminal and type (for Ubuntu):
+In order to produce the documentation of the project, please make sure that [Doxygen](https://www.doxygen.nl/) is installed on your machine. If not, open a terminal and type (for Ubuntu):
 ```
 sudo apt-get update
 sudo apt-get install doxygen
 ```
-once [Doxygen] is installed, documentation can be generated either by typing
+once Doxygen is installed, documentation can be generated either by typing
 ```
 doxygen
 ```
-in a terminal window in the project repository (this will cause all the target files to be scanned in order to produce documentation), or by installing [Doxywizard]. In the latter case, open a terminal and type:
+in a terminal window in the project repository (this will cause all the target files to be scanned in order to produce documentation), or by installing [Doxywizard](https://doxygen.nl/manual/doxywizard_usage.html). In the latter case, open a terminal and type:
 ```
 sudo apt-get install doxygen-gui
 ```
-Thus, [Doxywizard] can be run as follows:
+Thus, Doxywizard can be run as follows:
 ```
 doxywizard
 ```
-In the window that will appear it will be possible to specify the working directory from which [Doxygen] will run and the directory where [Doxygen] will put the generated documentation. Once the process is completed, two directories will be now visible:
+In the window that will appear it will be possible to specify the working directory from which Doxygen will run and the directory where Doxygen will put the generated documentation. Once the process is completed, two new directories will be visible:
 
 * html;
 * latex.
@@ -95,7 +95,7 @@ In order to define the Cauchy problem and the desired solver, the user must prov
 * if wanted, the user can change the default value of tolerance between two subsequent iterations (tol) and maximum number of iterations (nmax) for the implicit methods (which require the use of nonlinear equation solvers, which are stopped by either tol or nmax).
 	
 	
-## SPECIFYING THE PARAMETERS
+## Specifying the parameters
 The parameters of the problem of interest can be specified in 3 different ways:
 
 1) As asked by the program: if the user runs only the executable (e.g: ./Project_PCSC), the program itself will ask 
@@ -132,7 +132,7 @@ Both methods are iterative, which means that a stopping criteria must be chosen.
 The user can decide to visualize the solution of the ODE in two ways:
 
 * let the program print the solution to the screen (two columns format);
-* let the program produce a [MATLAB](https://www.mathworks.com/products/matlab.html) file, where the solution is plotted and visualized. In this case, make sure [MATLAB] is installed on your device.
+* let the program produce a [MATLAB](https://www.mathworks.com/products/matlab.html) file, where the solution is plotted and visualized. In this case, make sure MATLAB is installed on your device.
 
 
 
