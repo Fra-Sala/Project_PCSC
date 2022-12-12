@@ -38,9 +38,9 @@ void AdamsBashforth::solve() {
             double t = t0 + h * i;
             double y = sol.rbegin()->second + h * (23. / 12. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
                                                 - 16. / 12. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), 1)->first, std::prev(sol.rbegin(), 1)->second)
+                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
                                                 + 5. / 12. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), 2)->first, std::prev(sol.rbegin(), 2)->second));
+                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second));
             sol.emplace(t, y);
         }
     } else if (this->steps == 4) {
@@ -48,11 +48,11 @@ void AdamsBashforth::solve() {
             double t = t0 + h * i;
             double y = sol.rbegin()->second + h * (55. / 24. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
                                                 - 59. / 24. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), 1)->first, std::prev(sol.rbegin(), 1)->second)
+                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
                                                 + 37. / 24. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), 2)->first, std::prev(sol.rbegin(), 2)->second)
+                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second)
                                                 - 9. / 24. *
-                                                this->funObject->EvaluateFun(std::prev(sol.rbegin(), 3)->first, std::prev(sol.rbegin(), 3)->second));
+                                                this->funObject->EvaluateFun(std::prev(sol.rbegin(), -3)->first, std::prev(sol.rbegin(), -3)->second));
             sol.emplace(t, y);
         }
     }

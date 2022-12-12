@@ -50,22 +50,22 @@ double AdamsMoulton::AdamsMoultonNstep(int nSteps) {
         // sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
     } else if (nSteps == 2) {
         this->a = -sol.rbegin()->second - this->h*(8.0/12.0*this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second) +
-                -1.0/12.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), 1)->first, std::prev(sol.rbegin(), 1)->second));
+                -1.0/12.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second));
         this->b = -this->h*5.0/12.0;
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
     } else if (nSteps == 3) {
 
         this->a = -sol.rbegin()->second - this->h*(19.0/24.0*this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
-                        -5.0/24.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), 1)->first, std::prev(sol.rbegin(), 1)->second)+
-                        1.0/24.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), 2)->first, std::prev(sol.rbegin(), 2)->second));
+                        -5.0/24.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)+
+                        1.0/24.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second));
         this->b = -this->h*9.0/24.0;
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
 
     } else if (nSteps == 4) {
         this->a = -sol.rbegin()->second - this->h*(646.0/720.0*this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)  -
-                                                   264.0/720.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), 1)->first, std::prev(sol.rbegin(), 1)->second)+
-                                                    106.0/720.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), 2)->first, std::prev(sol.rbegin(), 2)->second)
-                                                    -19.0/720.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), 3)->first, std::prev(sol.rbegin(), 3)->second));
+                                                   264.0/720.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)+
+                                                    106.0/720.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second)
+                                                    -19.0/720.0*this->funObject->EvaluateFun(std::prev(sol.rbegin(), -3)->first, std::prev(sol.rbegin(), -3)->second));
         this->b = -this->h*251.0/720.0;
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
 

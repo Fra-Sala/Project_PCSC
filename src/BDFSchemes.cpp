@@ -40,18 +40,18 @@ double BDFSchemes::BDFSchemesNsteps(int nSteps)
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
         // sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
     } else if (nSteps == 2) {
-        this->a = -4.0/3.0*sol.rbegin()->second +1.0/3.0*std::prev(sol.rbegin(),1)->second;
+        this->a = -4.0/3.0*sol.rbegin()->second +1.0/3.0*std::prev(sol.rbegin(),-1)->second;
         this->b = -this->h*2.0/3.0;
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
     } else if (nSteps == 3) {
 
-        this->a = -18.0/11.0*sol.rbegin()->second  +9.0/11.0*std::prev(sol.rbegin(),1)->second -2.0/11.0*std::prev(sol.rbegin(),2)->second;
+        this->a = -18.0/11.0*sol.rbegin()->second  +9.0/11.0*std::prev(sol.rbegin(),-1)->second -2.0/11.0*std::prev(sol.rbegin(),-2)->second;
         this->b = -this->h*6.0/11.0;
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
 
     } else if (nSteps == 4) {
-        this->a = -48.0/25.0*sol.rbegin()->second + 36.0/25.0*std::prev(sol.rbegin(),1)->second - 16.0/25.0*std::prev(sol.rbegin(),2)->second
-                   + 3.0/25.0*std::prev(sol.rbegin(),3)->second ;
+        this->a = -48.0/25.0*sol.rbegin()->second + 36.0/25.0*std::prev(sol.rbegin(),-1)->second - 16.0/25.0*std::prev(sol.rbegin(),-2)->second
+                   + 3.0/25.0*std::prev(sol.rbegin(),-3)->second ;
         this->b = -this->h*12.0/25.0;
         y_new = this->SolveNonLinearEquation(t_new, sol.rbegin()->second);
 
