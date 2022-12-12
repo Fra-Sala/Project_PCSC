@@ -16,7 +16,6 @@ enable_testing()
 file(GLOB filesmain "src/*.cpp")
 add_executable(ProjectOdeSolver src/main.cpp ${filesmain})
 
-
 file(GLOB filestest "src/*.h" "src/*.cpp")
 
 FOREACH(item ${filestest})

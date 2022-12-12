@@ -7,17 +7,17 @@
 #ifndef PROJECT_PCSC_BDFSCHEMES_H
 #define PROJECT_PCSC_BDFSCHEMES_H
 
-#include "AbstractImplicitOdeSolver.h"
+#include "ImplicitOdeSolver.h"
 
-class BDFSchemes : public AbstractImplicitOdeSolver {
+class BDFSchemes : public ImplicitOdeSolver {
 
 private:
     int steps;
 
 public:
-    // Customized constructor inherited from AbstractImplicitOdeSolver
+    // Customized constructor inherited from ImplicitOdeSolver
     BDFSchemes(const double stepsize, const double initval, const double inittime, const double fintime,
-                  AbstractParser* fun_obj, int nSteps, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tolmax, max_iter) {this->steps = nSteps;};
+                  AbstractParser* fun_obj, int nSteps, const double tolmax = 1e-8, const double max_iter = 1000) : ImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tolmax, max_iter) { this->steps = nSteps;};
 
     // Here we override the method inherited from AbstractOdeSolver
     void solve() override;

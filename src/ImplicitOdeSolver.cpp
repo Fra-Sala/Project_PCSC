@@ -3,17 +3,17 @@
 //
 
 #include <iostream>
-#include "AbstractImplicitOdeSolver.h"
+#include "ImplicitOdeSolver.h"
 #include "Exception.h"
 
 
 
-double AbstractImplicitOdeSolver::NonLinearEquation(double t, double y) {
+double ImplicitOdeSolver::NonLinearEquation(double t, double y) {
     return (y + this->a + this->b*this->funObject->EvaluateFun(t,y));
 }
 
 
-double AbstractImplicitOdeSolver::SolveNonLinearEquation(double t, double y) {
+double ImplicitOdeSolver::SolveNonLinearEquation(double t, double y) {
     double ySol;
     try {
         ySol = FixedPoint(t,y);
@@ -29,7 +29,7 @@ double AbstractImplicitOdeSolver::SolveNonLinearEquation(double t, double y) {
 }
 
 
-double AbstractImplicitOdeSolver::FixedPoint(double t, double y) {
+double ImplicitOdeSolver::FixedPoint(double t, double y) {
     double it = 0.0;
     double y_new;
     double y_old = y;
@@ -51,7 +51,7 @@ double AbstractImplicitOdeSolver::FixedPoint(double t, double y) {
 }
 
 
-double AbstractImplicitOdeSolver::Broyden(double t, double y) {
+double ImplicitOdeSolver::Broyden(double t, double y) {
     double it = 0;
     double y_oldold = y;
     double y_old = y_oldold+this->h;

@@ -15,7 +15,7 @@
 #include "AbstractParser.h"
 #include "Fparser.h"
 #include "ManageInput.h"
-
+#include "ImplicitOdeSolver.h"
 #include "AbstractOdeSolver.h"
 #include "ForwardEuler.h"
 #include "AdamsBashforth.h"
