@@ -15,6 +15,12 @@
 //
 //
 
+/*! \class AbstractImplicitOdeSolver
+    \brief Abstract class derived from AbstractOdeSolver. All implicit-solver classes derive from this class.
+
+    This class is Abstract. It allows to initialize every field common to the different implicit methods that will be
+    implemented in daughter classes.
+*/
 
 
 #include "AbstractImplicitOdeSolver.h"
@@ -22,7 +28,7 @@
 class AdamsMoulton : public AbstractImplicitOdeSolver {
 
 private:
-    int steps;    // number of steps
+    int steps;    /// < number of steps for this multistep method
 public:
     // Customized constructor inherited from AbstractImplicitOdeSolver
     AdamsMoulton(const double stepsize, const double initval, const double inittime, const double fintime,
