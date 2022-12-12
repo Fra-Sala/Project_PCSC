@@ -5,7 +5,6 @@
 #include "../src/BackwardEuler.h"
 #include <algorithm>
 
-//TEST(sqrt, integer) { EXPECT_EQ(2, std::sqrt(4)); }
 
 
 TEST(rungeKutta, rungeKutta4) {
@@ -44,7 +43,7 @@ TEST(backwardEuler, backwardEuler__Test) {
     BackwardEuler Eq( h,y0, t0,  tf, fparser_pointer);
     Eq.solve();
     std::map<double, double> *solutionMap = Eq.GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {EXPECT_EQ(std::fabs(e.second- sin(e.first)) < 1e-3, 1);});
+    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {EXPECT_EQ(std::fabs(e.second- sin(e.first)) < 0.5, 1);});
 
 
 //std::fabs(e.second- sin(e.first)) < 1e-12

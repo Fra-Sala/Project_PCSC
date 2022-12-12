@@ -1,6 +1,5 @@
 // Libraries and headers
 #include <cassert>
-#include <gtest/gtest.h>
 #include "ManageInput.h"
 #include "AbstractOdeSolver.h"
 
