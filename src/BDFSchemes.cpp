@@ -12,7 +12,7 @@ void BDFSchemes::solve() {
     // The first n steps are solved using the corresponding Adams-Moulton method
     for (int i = 1; i < this->steps; i++)
     {
-        double y = this->BDFSchemesNsteps(i);
+        double y = this->BDFSchemesNstep(i);
         sol.emplace(this->sol.rbegin()->first + this->h, y);
     }
 
@@ -21,14 +21,14 @@ void BDFSchemes::solve() {
 
     for (int i = this->steps; i <= N; i++)
     {
-        double y = this->BDFSchemesNsteps(this->steps);
+        double y = this->BDFSchemesNstep(this->steps);
         sol.emplace(this->sol.rbegin()->first + this->h, y);
 
     }
 }
 
 
-double BDFSchemes::BDFSchemesNsteps(int nSteps)
+double BDFSchemes::BDFSchemesNstep(int nSteps)
 {
 
     double y_new = 0.0;
