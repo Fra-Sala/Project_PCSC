@@ -33,6 +33,11 @@ public:
     */
     void solve() override;
 
+
+    //! Overridden destructor inherited from AbstractOdeSolver.
+    /*!
+       Frees the memory associated with the member @param funObject.
+    */
     ~ForwardEuler() override;
 
 };

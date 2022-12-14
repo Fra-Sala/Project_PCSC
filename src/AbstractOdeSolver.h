@@ -39,9 +39,11 @@ public:
     */
     AbstractOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
                      AbstractParser* fun_object);
-    //! An overridden destructor.
+
+    //! Default destructor.
     /*!
-      It frees the memory associated with the dynamically allocated members.
+      Here, the behaviour of such destructor is explicitly set to 'default'. It will be overridden in every
+       child class (i.e. for every different method to solve an ODE implemented).
     */
     virtual ~AbstractOdeSolver() = default;
 

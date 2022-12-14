@@ -30,13 +30,11 @@ public:
        This constructor takes as input a std::string "f(t,y)" (e.g: "cos(t)*y"), and parses the given string, setting the member
        object pointer rhs (pointer of type FunctionParser) to store the parsing. The given f must be function of t and y.
     */
-
-
     Fparser(std::string fun_rhs) : AbstractParser(fun_rhs) {this->rhs->Parse(this->funString, "t,y");}
 
-    //! Destructor.
+    //! Overridden destructor inherited from AbstractParser.
     /*!
-       Frees the memory associated with the member #rhs
+       Frees the memory associated with the member @param rhs.
     */
     ~Fparser() override;
 
@@ -44,7 +42,6 @@ public:
      * It takes the values of t,y at which the evaluation is required, and returns the evaluation as a double.
      * e.g: double val = EvaluateFun(5.0,3.0);
     */
-
     double EvaluateFun(double t, double y) override;
 
 };
