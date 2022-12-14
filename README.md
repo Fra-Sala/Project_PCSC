@@ -11,19 +11,20 @@
 ## Project Description
 This C++ project aims at solving the Cauchy problem for 1st order Ordinary Differential Equations (ODE) in the form:
 
-		y'=f(t,y)
-		y(0) = y0
-		t \in [t0, tf]
+		$$y'=f(t, y) \\$$
+		$$y(0) = y_0 \\$$
+		$$t \in [t_0, t_f] \\$
 
 The user can select one of the following list of ODE solvers:
-
-1) Forward Euler
-2) Adams-Bashforth multistep method (1 to 4 steps)
-3) Backward Euler
-4) Explicit Runge-Kutta             (1 to 4 stages)
-5) Backward Differentiation Formula (BDF) (1 to 3 steps)
-6) Adams-Moulton multistep methods  (1 to 4 steps)
-
+$\begin{enumerate}
+	\item Forward Euler
+	\item Adams-Bashforth multistep method (1 to 4 steps)
+	\item Backward Euler
+	\item Explicit Runge-Kutta (1 to 4 stages)
+	\item Backward Differentiation Formula (BDF) (1 to 3 steps)
+	\item Adams-Moulton multistep methods (1 to 4 steps)
+   \end{enumerate}$
+   
 ###########################################################################################################################
 ######################## DON'T KNOW IF WE SHOULD KEEP THIS OR NOT 
 ############################################################################################################################
