@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
     assert(ptr);
     ptr->solve();
     ptr->VisualizeSolution();
+
     return 0;
 }
 

@@ -17,18 +17,18 @@
 #define PROJECT_PCSC_BACKWARDEULER_H
 
 
-#include "ImplicitOdeSolver.h"
+#include "AbstractImplicitOdeSolver.h"
 
 /*! \class BackwardEuler class
-    \brief Class derived from ImplicitOdeSolver. Implicit Euler method to solve ODE
+    \brief Class derived from AbstractImplicitOdeSolver. Implicit Euler method to solve ODE
 
     This class features the backward Euler algorithm.
 */
 
-class BackwardEuler : public ImplicitOdeSolver {
+class BackwardEuler : public AbstractImplicitOdeSolver {
 
 public:
-    //! Customized constructor inherited from ImplicitOdeSolver.
+    //! Customized constructor inherited from AbstractImplicitOdeSolver.
     /*!
       This customized constructor allows to initialize all the members contained in the mother class, apart from the
       standard map containing the solution. Here, the number of steps desired is to be specified too. The value of tolerance
@@ -36,7 +36,7 @@ public:
       or left as default values (tol = 1e-8, max_iter = 1000).
     */
     BackwardEuler(const double stepsize, const double initval, const double inittime, const double fintime,
-                   AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : ImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tolmax, max_iter) {};
+                   AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tolmax, max_iter) {};
 
     /*! This method applies the Backward Euler algorithm, as follows:
     *

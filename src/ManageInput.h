@@ -15,7 +15,7 @@
 #include "AbstractParser.h"
 #include "Fparser.h"
 #include "ManageInput.h"
-#include "ImplicitOdeSolver.h"
+#include "AbstractImplicitOdeSolver.h"
 #include "AbstractOdeSolver.h"
 #include "ForwardEuler.h"
 #include "AdamsBashforth.h"
@@ -45,8 +45,8 @@ private:
 
     int stages = 0;             ///< number of stages (for Runge-Kutta methods)
 
-    double nmax;                ///< max number of iterations to solve the non-linear equation (implicit methods only)
-    double tol;                 ///< tolerance on the solution of the non-linear equation (implicit methods only)
+    double nmax = 0;                ///< max number of iterations to solve the non-linear equation (implicit methods only)
+    double tol = 0;                 ///< tolerance on the solution of the non-linear equation (implicit methods only)
 
 public:
     //! \brief Customized constructor to initialize the class variables.

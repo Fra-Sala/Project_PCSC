@@ -72,6 +72,19 @@ ManageInput::ManageInput(int Nargs, char *args[]) {
             } while (stages < 1 || stages > 4);
         }
 
+        // If the method is implicit, we ask the user whether he would like to specify nmax and tolerance or not
+        if (method == 3 || method == 5 || method == 6) {
+            char choice;
+            std::cout << "Do you want to specify a tolerance and a number of max iterations for the resolution of"
+                         "the non-linear equation? Default values are tol = 1e-8 and nmax = 1000. [type y/n]"
+                      << std::endl;
+            std::cin >> choice;
+            if (choice == 'y') {
+                std::cout << "Specify tolerance and max number of iterations (e.g: 1e-10  1e4): ";
+                std::cin >> tol >> nmax;
+            }
+        }
+
     } else if (strcmp(args[1], "FILE") == 0 || strcmp(args[1], "file") == 0) {
 
         std::ifstream read_param(args[2]);
@@ -99,6 +112,18 @@ ManageInput::ManageInput(int Nargs, char *args[]) {
         } else if (method == 4) {
             stages = atoi(args[7]);
         }
+
+        // If the method is implicit, nmax and tolerance may be specified too
+        if (method == 3 || method == 5 || method == 6) {
+            // Backward Euler case
+            if (method == 3 || Nargs == 9) {
+                tol = atof(args[7]);
+                nmax = atof(args[8]);
+            } else if (Nargs == 10) {
+                tol = atof(args[8]);
+                nmax = atof(args[9]);
+            }
+        }
     }
 }
 
@@ -118,20 +143,11 @@ AbstractOdeSolver* ManageInput::ConstructSolver() {
             return Eq;
         }
         case 3: {
-            // Here it is possible to specify the tolerance and the number of max iterations as additional
-            // arguments
             BackwardEuler* Eq;
-            char choice;
-            std::cout << "Do you want to specify a tolerance and a number of max iterations for the resolution of"
-                         "the non-linear equation? Default values are tol = 1e-8 and nmax = 1000. [type y/n]"
-                      << std::endl;
-            std::cin >> choice;
-            if (choice == 'y') {
-                std::cout << "Specify tolerance and max number of iterations (e.g: 1e-10  1e4): ";
-                std::cin >> tol >> nmax;
-                Eq = new BackwardEuler(h, y0, t0, tf, fparser_pointer, tol, nmax);
-            } else {
+            if (tol == 0 && nmax == 0) {
                 Eq = new BackwardEuler(h, y0, t0, tf, fparser_pointer);
+            } else {
+                Eq = new BackwardEuler(h, y0, t0, tf, fparser_pointer, tol, nmax);
             }
             return Eq;
         }
@@ -141,33 +157,19 @@ AbstractOdeSolver* ManageInput::ConstructSolver() {
         }
         case 5: {
             BDFSchemes* Eq;
-            char choice;
-            std::cout << "Do you want to specify a tolerance and a number of max iterations for the resolution of"
-                         "the non-linear equation? Default values are tol = 1e-8 and nmax = 1000. [type y/n]"
-                      << std::endl;
-            std::cin >> choice;
-            if (choice == 'y') {
-                std::cout << "Specify tolerance and max number of iterations (e.g: 1e-10  1e4): ";
-                std::cin >> tol >> nmax;
-                Eq = new BDFSchemes(h, y0, t0, tf, fparser_pointer, s, tol, nmax);
-            } else {
+            if (tol == 0 && nmax == 0) {
                 Eq = new BDFSchemes(h, y0, t0, tf, fparser_pointer, s);
+            } else {
+                Eq = new BDFSchemes(h, y0, t0, tf, fparser_pointer, s, tol, nmax);
             }
             return Eq;
         }
         case 6: {
             AdamsMoulton* Eq;
-            char choice;
-            std::cout << "Do you want to specify a tolerance and a number of max iterations for the resolution of"
-                         "the non-linear equation? Default values are tol = 1e-8 and nmax = 1000. [type y/n]"
-                      << std::endl;
-            std::cin >> choice;
-            if (choice == 'y' || choice == 'Y') {
-                std::cout << "Specify tolerance and max number of iterations (e.g: 1e-10  1e4) ";
-                std::cin >> tol >> nmax;
-                Eq = new AdamsMoulton(h, y0, t0, tf, fparser_pointer, s, tol, nmax);
-            } else {
+            if (tol == 0 && nmax == 0) {
                 Eq = new AdamsMoulton(h, y0, t0, tf, fparser_pointer, s);
+            } else {
+                Eq = new AdamsMoulton(h, y0, t0, tf, fparser_pointer, s, tol, nmax);
             }
             return Eq;
         }

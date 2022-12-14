@@ -8,20 +8,19 @@
 
 
 /*! \class AdamsMoulton class
-    \brief Class derived from ImplicitOdeSolver. Implicit multistep method to solve ODE
+    \brief Class derived from AbstractImplicitOdeSolver. Implicit multistep method to solve ODE
 
     This class features the Adams-Moulton multistep method. Steps until 4 are implemented here.
 */
 
+#include "AbstractImplicitOdeSolver.h"
 
-#include "ImplicitOdeSolver.h"
-
-class AdamsMoulton : public ImplicitOdeSolver {
+class AdamsMoulton : public AbstractImplicitOdeSolver {
 
 private:
     int steps;                                /// < number of steps for this multistep method [1,4]
 public:
-    //! Customized constructor inherited from ImplicitOdeSolver.
+    //! Customized constructor inherited from AbstractImplicitOdeSolver.
     /*!
       This customized constructor allows to initialize all the members contained in the mother class, apart from the
       standard map containing the solution. Here, the number of steps desired is to be specified too. The value of tolerance
@@ -29,7 +28,7 @@ public:
       = 1000).
     */
     AdamsMoulton(const double stepsize, const double initval, const double inittime, const double fintime,
-                  AbstractParser* fun_obj, int nSteps, const double tol = 1e-8, const double max_iter = 1000) : ImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tol, max_iter) { this->steps = nSteps;};
+                  AbstractParser* fun_obj, int nSteps, const double tol = 1e-8, const double max_iter = 1000) : AbstractImplicitOdeSolver(stepsize, initval, inittime, fintime, fun_obj, tol, max_iter) { this->steps = nSteps;};
 
     /*! Here the virtual method from the mother class AbstractOdeSolver is overridden according
     *  to the Adams-Moulton method. The method AdamsMoultonNstep() is called varying nSteps.
@@ -54,7 +53,7 @@ public:
      *  \frac{106}{720}f(t_{n+1}, y_{n+1}) - \frac{19}{720} f(t_{n}, y_n)  \right)\f$,
     *
      * Since the nonlinear equation is in the form \f$g(y_{n+1}) = 0 = y_{n+1} + a + b f(t_{n+1}, y_{n+1})\f$, at each time step the members of the class
-     * ImplicitOdeSolver \f$a \f$ and \f$b \f$ are set according to the above algorithm.
+     * AbstractImplicitOdeSolver \f$a \f$ and \f$b \f$ are set according to the above algorithm.
      * \see SolveNonLinearEquation()
      * @param nSteps (integer)
      * @return the solution of the nonlinear equation at timestep \f$t_{n+1}\f$ for Adams-Moulton with the specified number of steps.

@@ -3,19 +3,19 @@
 //
 
 
-#ifndef PROJECT_PCSC_IMPLICITODESOLVER_H
-#define PROJECT_PCSC_IMPLICITODESOLVER_H
+#ifndef PROJECT_PCSC_ABSTRACTIMPLICITODESOLVER_H
+#define PROJECT_PCSC_ABSTRACTIMPLICITODESOLVER_H
 
 #include "AbstractOdeSolver.h"
 
-/*! \class ImplicitOdeSolver
+/*! \class AbstractImplicitOdeSolver
     \brief Daughter class of AbstractOdeSolver required for every implemented implicit method to solve an ODE.
 
     This class is Abstract. It allows to initialize every field common to the different implicit methods that will be
     implemented in daughter classes.
 */
 
-class ImplicitOdeSolver : public AbstractOdeSolver {
+class AbstractImplicitOdeSolver : public AbstractOdeSolver {
 
 protected:
     double nmax;                ///< max number of iterations allowed to solve the non-linear equation
@@ -32,8 +32,8 @@ public:
       solve the non-linear equation and the desired tolerance. If no argument is given, both variables take a default
       value.
     */
-    ImplicitOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
-                      AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->tol = tolmax, this->nmax = max_iter, this->a = 0.0, this->b = 0.0;};
+    AbstractImplicitOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
+                              AbstractParser* fun_obj, const double tolmax = 1e-8, const double max_iter = 1000) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->tol = tolmax, this->nmax = max_iter, this->a = 0.0, this->b = 0.0;};
 
     /** This method evaluates the \f$g(y_{n+1})\f$, LHS of the nonlinear equation \f$g(y)=0\f$. It takes two arguments
      * and returns a double value. We exploit the fact that the general \f$g(y) \f$ is in the form \f$g(y) = y_{n+1} + a + b \cdot f(t_{n+1}, y_{n+1})\f$.
@@ -87,8 +87,6 @@ public:
      * @return the solution of the nonlinear equation \f$ySol\f$.
     */
     double Broyden(double t, double y);
-
-
 };
 
-#endif //PROJECT_PCSC_IMPLICITODESOLVER_H
+#endif //PROJECT_PCSC_ABSTRACTIMPLICITODESOLVER_H
