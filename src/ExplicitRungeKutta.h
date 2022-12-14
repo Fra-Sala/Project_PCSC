@@ -42,7 +42,6 @@ public:
     *  \f$s=2\f$: \f$y_{n + 1} = y_n + \frac{1}{2} h (K_1 + K_2)\f$, where \f$K_1 = f(t_n, y_n)\f$ and \f$K_2 =
      *  f(t_{n + 1}, y_n + hK_1)\f$.
     *
-     * MISSING
     *  \f$s=3\f$: \f$y_{n + 3} = y_{n + 2} + h\left(\frac{23}{12}f(t_{n + 2}, y_{n + 2})
     *  - \frac{16}{12}f(t_{n + 1}, y_{n + 1}) + \frac{5}{12}f(t_n, y_n)\right)\f$
     *

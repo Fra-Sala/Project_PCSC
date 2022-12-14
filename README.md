@@ -124,7 +124,7 @@ Evidently, the most user-friendly option is the 1st one presented.
 
 
 ## About the implicit methods
-Implicit methods require, at each timestep, the solution of a nonlinear equation g(x) = 0. 
+Implicit methods require, at each timestep, the solution of a nonlinear equation $g(x) = 0$. 
 To solve such equations, two algorithms were implemented: fixed point iterations, and Broyden method (quasi-Newton method).
 Both methods are iterative, which means that a stopping criteria must be chosen. In this project, both algorithm are stopped when either the number of iterations equals nmax (by default, nmax = 1000) or when the difference between two values of x is smaller, in absolute value, than a given tolerance tol (by default, tol = 1e-8). The ODE solver tries first the fixed point iteration algorithm; if it fails to converge, the program switches to Broyden method. In this case an exception is thrown, and a warning is printed to let the user know about this behaviour.
 
