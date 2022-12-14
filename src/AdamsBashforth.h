@@ -45,6 +45,9 @@ public:
      *  - \frac{59}{24}f(t_{n + 2}, y_{n + 2}) + \frac{37}{24}f(t_{n + 1}, y_{n + 1}) - \frac{9}{24}f(t_n, y_n)\right)\f$
      */
     void solve() override;
+
+
+    ~AdamsBashforth() override;
 };
 
 #endif //PROJECT_SALA_VISCUSI_ADAMSBASHFORTH_H

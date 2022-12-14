@@ -39,7 +39,11 @@ public:
     */
     AbstractOdeSolver(const double stepsize, const double initval, const double inittime, const double fintime,
                      AbstractParser* fun_object);
-
+    //! An overridden destructor.
+    /*!
+      It frees the memory associated with the dynamically allocated members.
+    */
+    virtual ~AbstractOdeSolver() = default;
 
     //! This void method allows solution visualization.
     void VisualizeSolution();

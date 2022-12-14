@@ -58,3 +58,8 @@ void AdamsBashforth::solve() {
     }
 }
 
+AdamsBashforth::~AdamsBashforth() {
+    delete this->funObject;
+
+}
+

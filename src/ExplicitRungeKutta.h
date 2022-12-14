@@ -52,6 +52,9 @@ public:
     */
     void solve() override;
 
+
+    ~ExplicitRungeKutta() override;
+
 };
 
 #endif //PROJECT_PCSC_EXPLICITRUNGEKUTTA_H

@@ -14,6 +14,7 @@ protected:
 
 public:
     AbstractParser(std::string fun_rhs);
+    virtual ~AbstractParser() = default;
     virtual double EvaluateFun(double t, double y) = 0;
 
 };

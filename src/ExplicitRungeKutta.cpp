@@ -67,3 +67,8 @@ void ExplicitRungeKutta::solve() {
         }
     }
 }
+
+ExplicitRungeKutta::~ExplicitRungeKutta() {
+
+    delete this->funObject;
+}

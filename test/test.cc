@@ -318,7 +318,7 @@ TEST(userInput, userInput__CommandLine) {
     ManageInput ode(argc, argv);
     AbstractOdeSolver *ptr = ode.ConstructSolver();
     assert(ptr);
-    ptr->solve();
+
     std::map<double, double> *solutionMap = ptr->GetSolution();
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
 }
@@ -349,8 +349,8 @@ TEST(nonlineareq, nonlineareq__FixedPoint) {
     std::string fun = "y";                             // the solution of this Cauchy problem is sin(t)
     Fparser fparser_obj(fun);
     Fparser* fparser_pointer = &fparser_obj;                // create a pointer to an object Fparser, which will be the function
-    BackwardEuler eq(0.01, 0, 0, 2, fparser_pointer);
-
+    BackwardEuler Eq(0.01, 0, 0, 2, fparser_pointer);
+    double sol = Eq.FixedPoint(5,6);
     // double solution = eq.SolveNonLinearEquation();
 }
 

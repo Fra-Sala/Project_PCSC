@@ -59,6 +59,9 @@ public:
      * @return the solution of the nonlinear equation at timestep \f$t_{n+1}\f$ for Adams-Moulton with the specified number of steps.
      */
     double AdamsMoultonNstep(int nSteps);
+
+
+    ~AdamsMoulton() override;
 };
 
 
