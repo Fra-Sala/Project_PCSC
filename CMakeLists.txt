@@ -24,11 +24,11 @@ FOREACH(item ${filestest})
     ENDIF(${item} MATCHES "src/main.cpp")
 ENDFOREACH(item)
 
-FOREACH(item ${filestest})
-    IF(${item} MATCHES "src/ManageInput.cpp")
-        LIST(REMOVE_ITEM filestest ${item})
-    ENDIF(${item} MATCHES "src/ManageInput.cpp")
-ENDFOREACH(item)
+#FOREACH(item ${filestest})
+#    IF(${item} MATCHES "src/ManageInput.cpp")
+#        LIST(REMOVE_ITEM filestest ${item})
+#    ENDIF(${item} MATCHES "src/ManageInput.cpp")
+#ENDFOREACH(item)
 
 add_executable(test_main test/test.cc ${filestest})
 

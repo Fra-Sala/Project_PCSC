@@ -7,6 +7,7 @@
 #include "../src/AdamsMoulton.h"
 #include "../src/AdamsBashforth.h"
 #include "../src/ForwardEuler.h"
+#include "../src/ManageInput.h"
 #include <algorithm>
 
 // Test for ForwardEuler
@@ -303,7 +304,29 @@ TEST(BDF, BDF4__Test) {
 }
 
 
+// Test for the ManageInput class, given a mock string (as specified by the user from command line)
 
+//TEST(userInput, userInputCommandLine) {
+//
+//    char **argv = new char *[7];
+//    argv[0] = (char*) "nameExecutable";    //mock variable, which should is stored as 1st input
+//    argv[1] = (char*)"5";                 // method (5 -> multistep BDF schemes)
+//    argv[2] = (char*)"cos(t)";           // "f(t,y)"
+//    argv[3] = (char*)"0";                // t0
+//    argv[4] = (char*)"2";                // tf
+//    argv[5] = (char*) "0.01";            // h
+//    argv[6] = (char*)"0";                // y0
+//    argv[7] = (char*)"4";                // number of steps
+//    int argc = 7;
+//    ManageInput ode(argc, argv);
+//    AbstractOdeSolver *ptr = ode.ConstructSolver();
+//    assert(ptr);
+//    ptr->solve();
+//    ptr->VisualizeSolution();
+//    std::map<double, double> *solutionMap = ptr->GetSolution();
+//    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
+//
+//}
 
 
 

@@ -74,12 +74,12 @@ public:
       @param Nargs number of arguments.
       @param args actual arguments contained in a vector of strings.
     */
-    ManageInput(int Nargs, const char* args[]);
+    ManageInput(int Nargs, char* args[]);
 
-    /** This method sets the solver from the arguments that have been previously set. It takes n o input and returns a
-     * pointer variable to the solver object created. Additionally, if an implicit method is being considered,
+    /** This method sets the solver from the arguments that have been previously set. It takes no input and returns a
+     * pointer variable to the solver object created. Additionally, if an implicit method is selected,
      * the program asks the user whether he/she would like to specify a maximum number of iteration and tolerance
-     * to solve the non-linear equation. If the user does not want to, default values for both variables are considered.
+     * to solve the non-linear equation. Otherwise, default values for both variables are considered.
      * @return A pointer of type AbstractOdeSolver that points to an object of the specific method selected which
      * has every parameter set according to the previous choice.
     */
