@@ -53,6 +53,10 @@ public:
 
 
 
+    ~BackwardEuler() override;
+
+
+
 
 };
 #endif //PROJECT_PCSC_BACKWARDEULER_H

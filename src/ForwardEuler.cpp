@@ -18,3 +18,9 @@ void ForwardEuler::solve() {
 
 }
 
+ForwardEuler::~ForwardEuler() {
+
+    delete this->funObject;
+
+}
+

@@ -8,11 +8,14 @@
 #ifndef PROJECT_PCSC_FPARSER_H
 #define PROJECT_PCSC_FPARSER_H
 
-/*This class allows to parse a function, and to be able to evaluate it
- * from an input string. It inherits from AbstractParser, and uses the library
- * fparser4.5.2 (see http://warp.povusers.org/FunctionParser/fparser.html for documentation
- * of such library). It has a member a pointer to an object FunctionParser, an overriden constructor
- * and a method EvaluateFun, which allows other evaluate the given function. */
+/*! \class Fparser class
+    \brief Child class for parsing a string into a function.
+     This class allows to parse a function, and to be able to evaluate it
+     from an input string. It inherits from AbstractParser, and uses the library
+     fparser4.5.2 (see http://warp.povusers.org/FunctionParser/fparser.html for documentation
+     of such library). It has a member a pointer to an object FunctionParser, an overriden constructor
+     and a method EvaluateFun, which allows other evaluate the given function.
+ */
 class Fparser : public AbstractParser {
 
 private:
@@ -34,7 +37,7 @@ public:
     /*!
        Frees the memory associated with the member #rhs
     */
-    ~Fparser();
+    ~Fparser() override;
 
     /*! This method uses the method Eval defined in the library fparser4.5.2 for objects FunctionParser to evaluate a given string and use it as function.
      * It takes the values of t,y at which the evaluation is required, and returns the evaluation as a double.

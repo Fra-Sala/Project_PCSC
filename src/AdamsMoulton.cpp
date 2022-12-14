@@ -73,3 +73,8 @@ double AdamsMoulton::AdamsMoultonNstep(int nSteps) {
 
     return y_new;
 }
+
+AdamsMoulton::~AdamsMoulton() {
+
+    delete this->funObject;
+}

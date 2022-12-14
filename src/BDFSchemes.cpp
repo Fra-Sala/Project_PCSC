@@ -60,3 +60,8 @@ double BDFSchemes::BDFSchemesNstep(int nSteps)
     return y_new;
 }
 
+BDFSchemes::~BDFSchemes() {
+
+    delete this->funObject;
+}
+

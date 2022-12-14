@@ -33,6 +33,8 @@ public:
     */
     void solve() override;
 
+    ~ForwardEuler() override;
+
 };
 
 

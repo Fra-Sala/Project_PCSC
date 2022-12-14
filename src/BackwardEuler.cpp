@@ -21,4 +21,9 @@ void BackwardEuler::solve() {
     }
 }
 
+BackwardEuler::~BackwardEuler() {
+
+    delete this->funObject;
+}
+
 
