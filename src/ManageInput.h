@@ -53,18 +53,18 @@ public:
     /*!
       This constructor allows the project to be run in three different ways:
 
-      1) The program is only run by ./Project_PCSC and no additional arguments are given: in this case the program will
+      1) The program is only run by ./ProjectOdeSolver and no additional arguments are given: in this case the program will
       guide the user through the program, asking the various parameters that are to be set in order to solve the desired
       ODE;
 
-      2) The program is run by ./Project_PCSC FILE <filename>: in this case the program will look for a file named
+      2) The program is run by ./ProjectOdeSolver FILE <filename>: in this case the program will look for a file named
       <filename> contained in the directory cmake-build-debug. If no file is found, the program aborts. Otherwise,
       the file is read and parameters are set. Note that the format of the file must be: method fun t0 tf h y0.
       If the method selected is a multistage or multistep method, one additional argument is to be specified, i.e. the
       number of steps or stages. In the end, note also that 'FILE' can also be inserted in lowercase letters, i.e.
       'file';
 
-      3) The program is run by ./Project_PCSC method "fun" to tf h y0: in this case all the arguments are given in the
+      3) The program is run by ./ProjectOdeSolver method "fun" to tf h y0: in this case all the arguments are given in the
       command line, so every parameter is set according to this choice. As in the previous case, if a multistep or a
       multistage method is considered, one additional arguments is to be specificed on the command line. Finally, note
       that in this case the variable \param fun should be inserted between quotation marks.
