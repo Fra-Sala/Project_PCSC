@@ -17,7 +17,6 @@ int main(int argc, char* argv[]) {
     ptr->solve();
     ptr->VisualizeSolution();
     delete ptr;
-    return 0;
 }
 
 

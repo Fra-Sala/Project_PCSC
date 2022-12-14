@@ -10,6 +10,7 @@
 
 /*! \class Fparser class
     \brief Child class for parsing a string into a function.
+
      This class allows to parse a function, and to be able to evaluate it
      from an input string. It inherits from AbstractParser, and uses the library
      fparser4.5.2 (see http://warp.povusers.org/FunctionParser/fparser.html for documentation
@@ -30,12 +31,12 @@ public:
        object pointer rhs (pointer of type FunctionParser) to store the parsing. The given f must be function of t and y.
     */
 
-
     Fparser(std::string fun_rhs) : AbstractParser(fun_rhs) {this->rhs = new FunctionParser, this->rhs->Parse(this->funString, "t,y");}
 
-    //! Destructor.
+
+    //! Overridden destructor inherited from AbstractParser.
     /*!
-       Frees the memory associated with the member #rhs
+       Frees the memory associated with the member @param rhs.
     */
     ~Fparser() override;
 
@@ -43,7 +44,6 @@ public:
      * It takes the values of t,y at which the evaluation is required, and returns the evaluation as a double.
      * e.g: double val = EvaluateFun(5.0,3.0);
     */
-
     double EvaluateFun(double t, double y) override;
 
 };

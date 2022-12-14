@@ -51,12 +51,11 @@ public:
      */
     void solve() override;
 
-
-
+    //! Overridden destructor inherited from AbstractOdeSolver.
+    /*!
+       Frees the memory associated with the member @param funObject.
+    */
     ~BackwardEuler() override;
-
-
-
 
 };
 #endif //PROJECT_PCSC_BACKWARDEULER_H

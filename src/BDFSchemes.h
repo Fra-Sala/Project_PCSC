@@ -59,9 +59,11 @@ public:
      */
     double BDFSchemesNstep(int nSteps);
 
+    //! Overridden destructor inherited from AbstractOdeSolver.
+    /*!
+       Frees the memory associated with the member @param funObject.
+    */
     ~BDFSchemes() override;
-
-
 };
 
 #endif //PROJECT_PCSC_BDFSCHEMES_H

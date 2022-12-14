@@ -344,7 +344,7 @@ TEST(userInput, userInput__File) {
     ptr->solve();
     std::map<double, double> *solutionMap = ptr->GetSolution();
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    
+
 }
 
 // Here we test the resolution of a dummy nonlinear equation
