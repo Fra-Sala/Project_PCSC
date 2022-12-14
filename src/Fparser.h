@@ -21,7 +21,7 @@ class Fparser : public AbstractParser {
 private:
 
     /// This pointer points to the object
-    FunctionParser *rhs = new FunctionParser;
+    FunctionParser *rhs; //= new FunctionParser;
 
 public:
     //! Customized constructor.
@@ -31,7 +31,7 @@ public:
     */
 
 
-    Fparser(std::string fun_rhs) : AbstractParser(fun_rhs) {this->rhs->Parse(this->funString, "t,y");}
+    Fparser(std::string fun_rhs) : AbstractParser(fun_rhs) {this->rhs = new FunctionParser, this->rhs->Parse(this->funString, "t,y");}
 
     //! Destructor.
     /*!

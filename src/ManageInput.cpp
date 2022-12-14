@@ -128,22 +128,23 @@ ManageInput::ManageInput(int Nargs, char *args[]) {
 }
 
 
-AbstractOdeSolver* ManageInput::ConstructSolver() {
+AbstractOdeSolver *ManageInput::ConstructSolver() {
 
     // Now, the parameters are set, hence we have to create an object of the type required
-    Fparser* fparser_pointer = new Fparser(fun);      // create a pointer to an object Fparser, which will be the function
+    Fparser *fparser_pointer = new Fparser(
+            fun);      // create a pointer to an object Fparser, which will be the function
 
     switch (method) {
         case 1: {
-            auto* Eq = new ForwardEuler(h, y0, t0, tf, fparser_pointer);
+            auto *Eq = new ForwardEuler(h, y0, t0, tf, fparser_pointer);
             return Eq;
         }
         case 2: {
-            auto* Eq = new AdamsBashforth(h, y0, t0, tf, fparser_pointer, s);
+            auto *Eq = new AdamsBashforth(h, y0, t0, tf, fparser_pointer, s);
             return Eq;
         }
         case 3: {
-            BackwardEuler* Eq;
+            BackwardEuler *Eq;
             if (tol == 0 && nmax == 0) {
                 Eq = new BackwardEuler(h, y0, t0, tf, fparser_pointer);
             } else {
@@ -152,11 +153,11 @@ AbstractOdeSolver* ManageInput::ConstructSolver() {
             return Eq;
         }
         case 4: {
-            auto* Eq = new ExplicitRungeKutta(h, y0, t0, tf, fparser_pointer, stages);
+            auto *Eq = new ExplicitRungeKutta(h, y0, t0, tf, fparser_pointer, stages);
             return Eq;
         }
         case 5: {
-            BDFSchemes* Eq;
+            BDFSchemes *Eq;
             if (tol == 0 && nmax == 0) {
                 Eq = new BDFSchemes(h, y0, t0, tf, fparser_pointer, s);
             } else {
@@ -165,7 +166,7 @@ AbstractOdeSolver* ManageInput::ConstructSolver() {
             return Eq;
         }
         case 6: {
-            AdamsMoulton* Eq;
+            AdamsMoulton *Eq;
             if (tol == 0 && nmax == 0) {
                 Eq = new AdamsMoulton(h, y0, t0, tf, fparser_pointer, s);
             } else {
