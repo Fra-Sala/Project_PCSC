@@ -10,6 +10,7 @@
 
 /*! \class Fparser class
     \brief Child class for parsing a string into a function.
+
      This class allows to parse a function, and to be able to evaluate it
      from an input string. It inherits from AbstractParser, and uses the library
      fparser4.5.2 (see http://warp.povusers.org/FunctionParser/fparser.html for documentation
