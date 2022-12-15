@@ -10,312 +10,59 @@
 #include "../src/ManageInput.h"
 #include <algorithm>
 
-// Test for ForwardEuler
-TEST(forwardEuler, forwardEuler__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-           // create a pointer to an object Fparser, which will be the function
+#include "FwdTest.h"
+#include "AdamsBashTest.h"
+#include "BkwTest.h"
+#include "RKTest.h"
+#include "BDFTest.h"
+#include "AdamsMoulTest.h"
 
-    ForwardEuler* Eq = new ForwardEuler( h,y0, t0,  tf, fparser_pointer);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
+// Test for ForwardEuler
+TEST_F(FwdTest, forward) {
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
-    delete Eq;
 }
 
 // Tests for AdamsBashforth
-TEST(AdamsBashforth, adamsBashforth1__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 1;
-    AdamsBashforth* Eq = new AdamsBashforth ( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
+TEST_P(AdamsBashTest, AdamsBash) {
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
-    delete Eq;
 }
-
-TEST(AdamsBashforth, adamsBashforth2__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 2;
-    AdamsBashforth* Eq = new AdamsBashforth ( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
-    delete Eq;
-}
-
-TEST(AdamsBashforth, adamsBashforth3__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 3;
-    AdamsBashforth* Eq = new AdamsBashforth ( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-TEST(AdamsBashforth, adamsBashforth4__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 4;
-    AdamsBashforth* Eq = new AdamsBashforth ( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
+INSTANTIATE_TEST_SUITE_P(AdamsBash, AdamsBashTest, ::testing::Values(1, 2, 3, 4));
 
 // Test for BackwardEuler
-TEST(backwardEuler, backwardEuler__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    BackwardEuler* Eq = new BackwardEuler( h,y0, t0,  tf, fparser_pointer);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
+TEST_F(BkwTest, backward) {
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
-    delete Eq;
 }
 
 // Tests for ExplicitRungeKutta
-TEST(rungeKutta, rungeKutta1__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int stages = 1;
-    ExplicitRungeKutta*  Eq = new ExplicitRungeKutta( h,y0, t0,  tf, fparser_pointer, stages);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
+TEST_P(RKTest, RK) {
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
-    delete Eq;
 }
-
-TEST(rungeKutta, rungeKutta2__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int stages = 2;
-    ExplicitRungeKutta*  Eq = new ExplicitRungeKutta( h,y0, t0,  tf, fparser_pointer, stages);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-
-}
-
-TEST(rungeKutta, rungeKutta3__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int stages = 3;
-    ExplicitRungeKutta*  Eq = new ExplicitRungeKutta( h,y0, t0,  tf, fparser_pointer, stages);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-TEST(rungeKutta, rungeKutta4__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int stages = 4;
-    ExplicitRungeKutta*  Eq = new ExplicitRungeKutta( h,y0, t0,  tf, fparser_pointer, stages);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-// Tests for AdamsMoulton
-TEST(AdamsMoulton, adamsMoulton1__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 1;
-    AdamsMoulton* Eq = new AdamsMoulton( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-TEST(AdamsMoulton, adamsMoulton2__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 2;
-    AdamsMoulton* Eq = new AdamsMoulton( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-TEST(AdamsMoulton, adamsMoulton3__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 3;
-    AdamsMoulton* Eq = new AdamsMoulton( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-TEST(AdamsMoulton, adamsMoulton4__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 4;
-    AdamsMoulton* Eq = new AdamsMoulton( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
+INSTANTIATE_TEST_SUITE_P(RK, RKTest, ::testing::Values(1, 2, 3, 4));
 
 // Tests for BDFSchemes
-TEST(BDF, BDF1__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 1;
-    BDFSchemes* Eq = new BDFSchemes( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
+TEST_P(BDFTest, BDF) {
     std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
-    delete Eq;
 }
+INSTANTIATE_TEST_SUITE_P(BDF, BDFTest, ::testing::Values(1, 2, 3, 4));
 
-TEST(BDF, BDF2__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 2;
-    BDFSchemes* Eq = new BDFSchemes( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
+// Tests for AdamsMoulton
+TEST_P(AdamsMoulTest, AdamsMoul) {
+    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-2);});
 }
-
-TEST(BDF, BDF3__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 3;
-    BDFSchemes* Eq = new BDFSchemes( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
-
-TEST(BDF, BDF4__Test) {
-    double h = 0.01;
-    double y0 = 0.0;
-    double t0 = 0.0;
-    double tf = 1.0;
-    std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
-    Fparser* fparser_pointer = new Fparser(fun);
-
-    int steps = 4;
-    BDFSchemes* Eq = new BDFSchemes( h,y0, t0,  tf, fparser_pointer, steps);
-    Eq->solve();
-    std::map<double, double> *solutionMap = Eq->GetSolution();
-    std::for_each(solutionMap->begin(), solutionMap->end(), [](auto& e) {ASSERT_NEAR(e.second, sin(e.first), 1e-3);});
-    delete Eq;
-}
+INSTANTIATE_TEST_SUITE_P(AdamsMoul, AdamsMoulTest, ::testing::Values(1, 2, 3, 4));
 
 // Tests for the ManageInput class, given a mock string (as specified by the user from command line)
 TEST(userInput, userInput__CommandLine) {
     int argc = 8;
     char **argv = new char *[argc];
-    argv[0] = (char*) "nameExecutable";    //mock variable, which should is stored as 1st input
-    argv[1] = (char*)"5";                 // method (5 -> multistep BDF schemes)
-    argv[2] = (char*)"cos(t)";           // "f(t,y)"
-    argv[3] = (char*)"0";                // t0
-    argv[4] = (char*)"2";                // tf
-    argv[5] = (char*) "0.01";            // h
-    argv[6] = (char*)"0";                // y0
-    argv[7] = (char*)"4";                // number of steps
+    argv[0] = (char*) "nameExecutable";    // mock variable, which should is stored as 1st input
+    argv[1] = (char*)"5";                  // method (5 -> multistep BDF schemes)
+    argv[2] = (char*)"cos(t)";             // "f(t,y)"
+    argv[3] = (char*)"0";                  // t0
+    argv[4] = (char*)"2";                  // tf
+    argv[5] = (char*) "0.01";              // h
+    argv[6] = (char*)"0";                  // y0
+    argv[7] = (char*)"4";                  // number of steps
     ManageInput ode(argc, argv);
     AbstractOdeSolver *ptr = ode.ConstructSolver();
     assert(ptr);
