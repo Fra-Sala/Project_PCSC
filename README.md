@@ -1,7 +1,7 @@
 # Programming Concepts in Scientific Computing Project
 ## Table of contents
 * [Project Description](#Description)
-* [Installation of the repository](#Installation)
+* [Cloning the repository and compiling](#Compiling)
 * [Producing documentation](#Documentation)
 * [Parameters](#Param)
 * [Specifying the parameters](#ParametersSpecification)
@@ -31,16 +31,27 @@ The user can select one of the following list of ODE solvers:
 6. Adams-Moulton multistep methods (1 to 4 steps)
 
 
-## Installation of the repository
+## Cloning the repository and compiling
 To use the code, please open a terminal, go to your desired directory and clone this repository (make sure that [GIT](https://git-scm.com/) is installed on your device). You can use the HTTPS URL as follow: 
 ```
 git clone https://github.com/Fra-Sala/Project_PCSC.git
 ```
-once the repository has been cloned, to run the code please open a terminal in the repository cloned, select the directory cmake-build-debug as follow:
+once the repository has been cloned, in order to compile and run the test, please install *googletest*. To do so, open a terminal in the cloned repository and type:
 ```
-cd cmake-build-debug
+git submodule update --init 
 ```
-At this point, the executable (ProjectOdeSolver) may be run in three different ways, as explained in [Parameters](#Param).
+At this point, building is done as usual, e.g. with [CLion](https://www.jetbrains.com/clion/) or in the terminal:
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+At this point, the executable (ProjectOdeSolver) can be run in three different ways, as explained in [Parameters](#Param).
+For what concerns test, they can be run as:
+```
+./test_main
+```
 
 
 ### To produce documentation 
@@ -107,7 +118,8 @@ Note that name_of_file.txt is a text file formatted as follows:
 --------- in "name_of_file.txt" --------------
 method f(t,y) t0 tf y0 h steps/stages tol nmax
 ----------------------------------------------
-```				
+```
+				
 (here the dashes are used only for highlighting purposes and are not to be included in the file).
 Once again, method is an integer from 1 to 6 as listes above, steps/stages are required only for method 2, 4, 5, 6, $tol$ and $nmax$ can be omitted. 
 
@@ -128,20 +140,7 @@ The user can decide to visualize the solution of the ODE in two ways:
 
 
 ## About the tests implemented
-In order to compile and run the test, please install *googletest*. To do so, open a terminal in the cloned repository and type:
 
-```
-git submodule update --init 
-```
-
-Then, building is done as usual, e.g. with [CLion](https://www.jetbrains.com/clion/) or in the terminal:
-
-```
-mkdir build
-cd build
-cmake ..
-make
-```
 
 
 
