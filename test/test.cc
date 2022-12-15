@@ -15,7 +15,7 @@ TEST(forwardEuler, forwardEuler__Test) {
     double h = 0.01;
     double y0 = 0.0;
     double t0 = 0.0;
-    double tf = 0.03;
+    double tf = 1;
     std::string fun = "cos(t)";     // the solution of this Cauchy problem is sin(t)
     Fparser* fparser_pointer = new Fparser(fun);
            // create a pointer to an object Fparser, which will be the function
