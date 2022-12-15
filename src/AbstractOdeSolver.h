@@ -9,8 +9,8 @@
 /*! \class AbstractOdeSolver
     \brief Mother abstract class for every implemented method to solve an ODE.
 
-    This class is Abstract. It allows to initialize every field common to the different methods that will be
-    implemented in daughter classes.
+    This class is Abstract. It allows to use inheritance to implement more easily
+    the different methods to solve an ODE, that will be implemented in daughter classes.
 */
 
 class AbstractOdeSolver {

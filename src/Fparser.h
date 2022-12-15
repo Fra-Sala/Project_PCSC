@@ -20,19 +20,15 @@
 class Fparser : public AbstractParser {
 
 private:
-
-    /// This pointer points to the object
-    FunctionParser *rhs; //= new FunctionParser;
+    FunctionParser *rhs;                    //< pointer that points to the object
 
 public:
-    //! Customized constructor.
+    //! Customized constructor inherited from AbstractParser.
     /*!
        This constructor takes as input a std::string "f(t,y)" (e.g: "cos(t)*y"), and parses the given string, setting the member
        object pointer rhs (pointer of type FunctionParser) to store the parsing. The given f must be function of t and y.
     */
-
     Fparser(std::string fun_rhs) : AbstractParser(fun_rhs) {this->rhs = new FunctionParser, this->rhs->Parse(this->funString, "t,y");}
-
 
     //! Overridden destructor inherited from AbstractParser.
     /*!
@@ -40,13 +36,14 @@ public:
     */
     ~Fparser() override;
 
-    /*! This method uses the method Eval defined in the library fparser4.5.2 for objects FunctionParser to evaluate a given string and use it as function.
-     * It takes the values of t,y at which the evaluation is required, and returns the evaluation as a double.
-     * e.g: double val = EvaluateFun(5.0,3.0);
+    /*! This method uses the method Eval defined in the library fparser4.5.2 for objects FunctionParser
+     * to evaluate a given string and use it as function.
+     *
+     * @param t value at which the evaluation is required.
+     * @param y value at which the evaluation is required.
+     * @return the evaluation as a double.
     */
     double EvaluateFun(double t, double y) override;
-
 };
-
 
 #endif //PROJECT_PCSC_FPARSER_H
