@@ -15,7 +15,7 @@ ManageInput::ManageInput(int Nargs, char *args[]) {
 
 
         std::cout << "Please choose a solving method:\n1) Forward Euler\n2) Adams Bashforth\n3) Backward Euler\n"
-                     "4) Explicit Runge Kutta\n5) BDF schemes\n6) Adams-Moulton\n\n";
+                     "4) Explicit Runge Kutta\n5) BDF schemes\n6) Adams Moulton\n\n";
         std::cin >> method;
 
         while (method < 1 || method > 6) {
@@ -31,8 +31,7 @@ ManageInput::ManageInput(int Nargs, char *args[]) {
         char var;                                            // dummy character variable
         do {
             std::cout
-                    << "Do you want to change the function entered? Type 'y' to modify, any other keyboard key to keep"
-                       " the present one." << std::endl;
+                    << "Do you want to change the function entered? [y|n]:" << std::endl;
             std::cin >> var;
             if (var == 'y') {
                 std::cin.ignore(1000, '\n');
@@ -116,7 +115,7 @@ ManageInput::ManageInput(int Nargs, char *args[]) {
         // If the method is implicit, nmax and tolerance may be specified too
         if (method == 3 || method == 5 || method == 6) {
             // Backward Euler case
-            if (method == 3 || Nargs == 9) {
+            if (method == 3 && Nargs == 9) {
                 tol = atof(args[7]);
                 nmax = atof(args[8]);
             } else if (Nargs == 10) {

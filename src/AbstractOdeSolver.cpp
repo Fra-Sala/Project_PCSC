@@ -45,8 +45,13 @@ void AbstractOdeSolver::VisualizeSolution() {
         write_sol << "plot(S(:,1), S(:,2), \"Linewidth\", 2)\ngrid on\ntitle(\"Solution of the ODE\")" << std::endl;
         write_sol.close();
     } else {
-        std::cout << "The solution is the following:" << std::endl << std::endl << "t " << "y" << std::endl;
-        std::for_each(sol.begin(), sol.end(), [](auto& map) {std::cout << map.first << " " << map.second << std::endl;});
+
+        std::cout << "The solution is the following:" << std::endl << "----------------------------------- " << std::endl;
+        std::cout << "   \tt    \t || \t   y   \t " << std::endl;
+        std::cout << "----------------------------------- " << std::endl;
+        std::cout.setf(std::ios::scientific);
+        std::cout.precision(3);
+        std::for_each(sol.begin(), sol.end(), [](auto& map) {std::cout << map.first << "\t || \t " << map.second << std::endl;});
     }
 }
 
