@@ -347,16 +347,44 @@ TEST(userInput, userInput__File) {
 
 }
 
-// Here we test the resolution of a dummy nonlinear equation
-//TEST(nonlineareq, nonlineareq__FixedPoint) {
-//    std::string fun = "y";                             // the solution of this Cauchy problem is sin(t)
-//    Fparser fparser_obj(fun);
-//    Fparser* fparser_pointer = &fparser_obj;                // create a pointer to an object Fparser, which will be the function
-//    BackwardEuler Eq(0.01, 0, 0, 2, fparser_pointer);
-//    double sol = Eq.FixedPoint(5,6);
-//    // double solution = eq.SolveNonLinearEquation();
-//}
-//
-//TEST(nonlineareq, nonlineareq__Broyden) {
-//    // BackwardEuler eq();
-//}
+ //Here we test the resolution of a dummy nonlinear equation to check the correctness of FixedPoint() method
+ // A simple case is tested: a solution of the ODE y' = cos(t), using Backward Euler, which leads, at the only timestep
+ // (given t0 = 0, tf = 0.5, and h = 0.5), the linear equation y + a+b*cos(t) = 0, whose solution is y = -a -b*cos(t).
+TEST(nonlineareq, nonlineareq__FixedPoint) {
+    std::string fun = "cos(t)";                                       // f(t,y) = cos(t)
+    Fparser* fparser_pointer = new Fparser(fun);              // create a pointer to an object Fparser, which will be the function
+    double h = 0.5;
+    double y0 = 1.0;
+    double t0 = 0.0;
+    double tf = 0.5;
+    BackwardEuler* Eq = new BackwardEuler( h,y0, t0,  tf, fparser_pointer);
+    Eq->solve();
+    std::map<double, double>* solMap = Eq->GetSolution();
+    double y_fixedpoint = solMap->rbegin()->second;
+    double y_ex = y0 +h*cos(tf);                      // a = -y0, b = -h
+    ASSERT_NEAR(y_fixedpoint, y_ex , 1e-4);
+    delete Eq;
+
+}
+
+//Here we test the resolution of a dummy nonlinear equation to check the correctness of Broyden() method
+// A simple case is tested: a solution of the ODE y' = y, using Backward Euler, which leads, at the only timestep
+// (given t0 = 0, tf = 0.5, and h = 0.5), the linear equation y + a+b*y = 0, whose solution is y = -a/(b+1).
+// The choice of f(t,y) = y will let FixedPoint fail (see convergence properties of fixed point iterations), and
+// consequently Broyden method will be called.
+TEST(nonlineareq, nonlineareq__Broyden) {
+    std::string fun = "y";                                       // f(t,y) = cos(t)
+    Fparser* fparser_pointer = new Fparser(fun);              // create a pointer to an object Fparser, which will be the function
+    double h = 0.5;
+    double y0 = 1.0;
+    double t0 = 0.0;
+    double tf = 0.5;
+    BackwardEuler* Eq = new BackwardEuler( h,y0, t0,  tf, fparser_pointer);
+    Eq->solve();
+    std::map<double, double>* solMap = Eq->GetSolution();
+    double y_broyden = solMap->rbegin()->second;
+    double y_ex = y0/(-h+1);                      // a = -y0, b = -h
+    ASSERT_NEAR(y_broyden, y_ex , 1e-4);
+    delete Eq;
+
+}
