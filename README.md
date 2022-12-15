@@ -111,7 +111,7 @@ method f(t,y) t0 tf y0 h steps/stages tol nmax
 (here the dashes are used only for highlighting purposes and are not to be included in the file).
 Once again, method is an integer from 1 to 6 as listes above, steps/stages are required only for method 2, 4, 5, 6, $tol$ and $nmax$ can be omitted. 
 
-Evidently, the most user-friendly option is the $1^{st}$ one presented.
+Evidently, the most user-friendly option is the first one presented.
 
 
 ## About the implicit methods
