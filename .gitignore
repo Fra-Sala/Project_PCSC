@@ -8,6 +8,5 @@ cmake_install.cmake
 .project
 .cproject
 cmake-build-debug
-googletest
 html
 latex
