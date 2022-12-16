@@ -12,54 +12,97 @@ void AdamsBashforth::solve() {
     sol.emplace(t0, y0);
 
     for (int i = 1; i < this->steps; i++) {
-        double t = t0 + h * i;
-        double y = sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
-        sol.emplace(t, y);
+        double y = this->AdamsBashforthNstep(i);
+        sol.emplace(this->sol.rbegin()->first + this->h, y);
     }
 
 // Now, depending on the particular numbers of steps,
 // a different implementation of Adams-Bashforth method is applied
-    if (this->steps == 1) {                                                           // this would simply be forward Euler
-        for (int i = this->steps; i <= N; i++) {
-            double t = t0 + h * i;
-            double y = sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
-            sol.emplace(t, y);
-        }
-    } else if (this->steps == 2) {
-        for (int i = this->steps; i <= N; i++) {
-            double t = t0 + h * i;
-            double y = sol.rbegin()->second + h * (3.0 / 2.0 * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
-                                                - 0.5 *
-                                                this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second));
-            sol.emplace(t, y);
-        }
-    } else if (this->steps == 3) {
-        for (int i = this->steps; i <= N; i++) {
-            double t = t0 + h * i;
-            double y = sol.rbegin()->second + h * (23. / 12. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
-                                                - 16. / 12. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
-                                                + 5. / 12. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second));
-            sol.emplace(t, y);
-        }
-    } else if (this->steps == 4) {
-        for (int i = this->steps; i <= N; i++) {
-            double t = t0 + h * i;
-            double y = sol.rbegin()->second + h * (55. / 24. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
-                                                - 59. / 24. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
-                                                + 37. / 24. *
-                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second)
-                                                - 9. / 24. *
-                                                this->funObject->EvaluateFun(std::prev(sol.rbegin(), -3)->first, std::prev(sol.rbegin(), -3)->second));
-            sol.emplace(t, y);
-        }
+
+    for (int i = this->steps; i <= N; i++)
+    {
+        double y = this->AdamsBashforthNstep(this->steps);
+        sol.emplace(this->sol.rbegin()->first + this->h, y);
     }
+
+
+
+//    if (this->steps == 1) {                                                           // this would simply be forward Euler
+//        for (int i = this->steps; i <= N; i++) {
+//            double t = t0 + h * i;
+//            double y = sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
+//            sol.emplace(t, y);
+//        }
+//    } else if (this->steps == 2) {
+//        for (int i = this->steps; i <= N; i++) {
+//            double t = t0 + h * i;
+//            double y = sol.rbegin()->second + h * (3.0 / 2.0 * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
+//                                                - 0.5 *
+//                                                this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second));
+//            sol.emplace(t, y);
+//        }
+//    } else if (this->steps == 3) {
+//        for (int i = this->steps; i <= N; i++) {
+//            double t = t0 + h * i;
+//            double y = sol.rbegin()->second + h * (23. / 12. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
+//                                                - 16. / 12. *
+//                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
+//                                                + 5. / 12. *
+//                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second));
+//            sol.emplace(t, y);
+//        }
+//    } else if (this->steps == 4) {
+//        for (int i = this->steps; i <= N; i++) {
+//            double t = t0 + h * i;
+//            double y = sol.rbegin()->second + h * (55. / 24. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
+//                                                - 59. / 24. *
+//                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
+//                                                + 37. / 24. *
+//                                                  this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second)
+//                                                - 9. / 24. *
+//                                                this->funObject->EvaluateFun(std::prev(sol.rbegin(), -3)->first, std::prev(sol.rbegin(), -3)->second));
+//            sol.emplace(t, y);
+//        }
+//    }
 }
 
 AdamsBashforth::~AdamsBashforth() {
     delete this->funObject;
 
+}
+
+double AdamsBashforth::AdamsBashforthNstep(int nSteps) {
+
+
+    double y_new = 0.0;
+
+    if (this->steps == 1) {                                                           // this would simply be forward Euler
+            y_new = sol.rbegin()->second + h * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second);
+    } else if (this->steps == 2) {
+
+
+            y_new = sol.rbegin()->second + h * (3.0 / 2.0 * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
+                                                   - 0.5 *this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second));
+
+
+    } else if (this->steps == 3) {
+
+            y_new = sol.rbegin()->second + h * (23. / 12. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
+                                                   - 16. / 12. *
+                                                     this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
+                                                   + 5. / 12. *
+                                                     this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second));
+
+
+    } else if (this->steps == 4) {
+
+            y_new = sol.rbegin()->second + h * (55. / 24. * this->funObject->EvaluateFun(sol.rbegin()->first, sol.rbegin()->second)
+                                                   - 59. / 24. *this->funObject->EvaluateFun(std::prev(sol.rbegin(), -1)->first, std::prev(sol.rbegin(), -1)->second)
+                                                   + 37. / 24. *this->funObject->EvaluateFun(std::prev(sol.rbegin(), -2)->first, std::prev(sol.rbegin(), -2)->second)
+                                                   - 9. / 24. *this->funObject->EvaluateFun(std::prev(sol.rbegin(), -3)->first, std::prev(sol.rbegin(), -3)->second));
+
+    }
+
+    return y_new;
 }
 

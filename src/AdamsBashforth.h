@@ -30,8 +30,23 @@ public:
                    AbstractParser* fun_obj, unsigned int nSteps) : AbstractOdeSolver(stepsize, initval, inittime, fintime, fun_obj) {this->steps = nSteps;};
 
     /*! Here the virtual method from the mother class AbstractOdeSolver is overridden according
+    *  to the Adams-Bashforth method. The method AdamsBashforthNstep() is called varying nSteps.
+     *  The first (steps-1) number of steps are computed using an increasing number of steps
+     *  then, at each timestep, the same method is called with nSteps = this->steps. The std::map of the solution is
+     *  updated accordingly.
+     *
+    */
+    void solve() override;
+
+    //! Overridden destructor inherited from AbstractOdeSolver.
+    /*!
+       Frees the memory associated with the member @param funObject.
+    */
+    ~AdamsBashforth() override;
+
+    /*! Here the virtual method from the mother class AbstractOdeSolver is overridden according
      *  to the desired algorithm. In this case, the first 'steps' solutions
-     *  are computed with Forward Euler. Here the algorithms:
+     *  are computed with a lower order Adams-Bashforth algorithm. Here the algorithms:
      *
      *  \f$s=1\f$: \f$y_{n + 1} = y_n + hf(t_n, y_n)\f$
      *
@@ -44,13 +59,8 @@ public:
      *  \f$s=4\f$: \f$y_{n + 4} = y_{n + 3} + h\left(\frac{55}{24}f(t_{n + 3}, y_{n + 3})
      *  - \frac{59}{24}f(t_{n + 2}, y_{n + 2}) + \frac{37}{24}f(t_{n + 1}, y_{n + 1}) - \frac{9}{24}f(t_n, y_n)\right)\f$
      */
-    void solve() override;
 
-    //! Overridden destructor inherited from AbstractOdeSolver.
-    /*!
-       Frees the memory associated with the member @param funObject.
-    */
-    ~AdamsBashforth() override;
+    double AdamsBashforthNstep(int nSteps);
 };
 
 #endif //PROJECT_SALA_VISCUSI_ADAMSBASHFORTH_H

@@ -35,7 +35,7 @@ public:
      *  The first (steps-1) number of steps are computed using an increasing number of steps
      *  then, at each timestep, the same method is called with nSteps = this->steps. The std::map of the solution is
      *  updated accordingly.
-     * \see solve() method.
+     *
     */
     void solve() override;
 
