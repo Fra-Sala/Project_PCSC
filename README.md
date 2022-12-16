@@ -82,7 +82,7 @@ In the window that will appear it will be possible to specify the working direct
 * html;
 * latex.
 
-Documentation can be visualized for example by looking for the file __index.html__ in the __html__ directory:
+Documentation can be visualized for example by looking for the file _index.html_ in the _html_ directory:
 
 ```
 cd html
@@ -100,7 +100,7 @@ In order to define the Cauchy problem and the desired solver, the user must prov
 * initial value for the solution $y_0$;
 * stepsize $h$ for domain discretization (the solution will be evaluated at $t_i = t_0 + h*i$,  $i = 1, ..., N$,  $N = \frac{t_f-t_0}{h}$;
 * the number of steps/stages (depending on the solver chosen);
-* if wanted, the user can change the default value of tolerance between two subsequent iterations ($tol$) and maximum number of iterations ($nmax$) for the implicit methods (which require the use of nonlinear equation solvers, which are stopped by either $tol$ or $nmax$).
+* if wanted, the user can change the default value of tolerance between two subsequent iterations $tol$ and maximum number of iterations $nmax$ for the implicit methods (which require the use of nonlinear equation solvers, which are stopped by either $tol$ or $nmax$).
 	
 	
 ## Specifying the parameters
