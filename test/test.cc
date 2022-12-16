@@ -131,3 +131,8 @@ TEST(nonlineareq, nonlineareq__Broyden) {
     ASSERT_NEAR(y_broyden, y_ex , 1e-4);
     delete Eq;
 }
+
+int main(int argc, char *argv[]) {
+    ::testing::InitGoogleTest(&argc, argv);
+return RUN_ALL_TESTS();
+}
